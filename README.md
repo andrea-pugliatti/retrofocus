@@ -1,6 +1,6 @@
 # Progetto Finale 
 
-Descrizione
+**Descrizione**
 
 L’obiettivo di questo progetto è creare un backoffice in Spring e un frontend in React per gestire e visualizzare un insieme di dati a vostra scelta.
 
