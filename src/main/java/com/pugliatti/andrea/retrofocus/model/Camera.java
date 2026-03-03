@@ -71,11 +71,6 @@ public class Camera {
     private Boolean videoCapable;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id", nullable = false)
-    @JsonBackReference
-    private Brand brand;
-
-    @ManyToOne
     @JoinColumn(name = "mount_id", nullable = false)
     @JsonBackReference
     private Mount mount;
@@ -198,14 +193,6 @@ public class Camera {
 
     public void setSensorResolution(Double sensorResolution) {
         this.sensorResolution = sensorResolution;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
     }
 
     public Mount getMount() {

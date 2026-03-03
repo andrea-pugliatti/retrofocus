@@ -49,11 +49,6 @@ public class Lens {
     private Boolean isAutofocus;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id", nullable = false)
-    @JsonBackReference
-    private Brand brand;
-
-    @ManyToOne
     @JoinColumn(name = "mount_id", nullable = false)
     @JsonBackReference
     private Mount mount;
@@ -128,14 +123,6 @@ public class Lens {
 
     public void setIsAutofocus(Boolean isAutofocus) {
         this.isAutofocus = isAutofocus;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
     }
 
     public Mount getMount() {
