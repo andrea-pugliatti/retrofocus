@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pugliatti.andrea.retrofocus.service.CameraService;
 
@@ -17,8 +18,9 @@ public class CameraController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("cameras", service.findAll());
+    public String index(Model model, @RequestParam(value = "q", required = false) String name) {
+        model.addAttribute("cameras", service.findAllOrByNameContaining(name));
+        model.addAttribute("query", name);
         return "cameras/index";
     }
 

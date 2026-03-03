@@ -9,6 +9,16 @@
     <main class="container mb-5">
         <h3 class="my-3">Cameras</h3>
 
+        <div class="my-3">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex mb-3" th:action="@{/cameras}">
+                    <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
+                        placeholder="Search...">
+                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
         <div class="text-center fs-5 fw-700" th:unless="${cameras.size() > 0}">
             There are no cameras available.
         </div>
@@ -25,7 +35,6 @@
                         <div class="my-1">[[*{type}]]</div>
                         <div class="my-1">[[*{format}]]</div>
                         <div class="my-1">[[*{yearReleased.getYear()}]]</div>
-
                     </div>
                 </div>
             </div>

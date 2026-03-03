@@ -19,4 +19,15 @@ public class CameraService {
         return repo.findAll();
     }
 
+    public List<Camera> findByNameContaining(String name) {
+        return repo.findByNameContaining(name);
+    }
+
+    public List<Camera> findAllOrByNameContaining(String name) {
+        if (name == null) {
+            return findAll();
+        }
+        return findByNameContaining(name);
+    }
+
 }
