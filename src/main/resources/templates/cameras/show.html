@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head(${camera.name})}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('cameras')}" />
+
+    <main class="container d-flex flex-column align-items-center">
+
+        <div class="card my-5" th:object="${camera}">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <img th:src="*{image}" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-4" style="min-width: fit-content;">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            [[*{name}]]
+                        </h3>
+                        <p class="card-text">
+                            [[*{description}]]
+                        </p>
+                        <p class="card-text" th:if="${camera.isAnalog}">
+                            Analog Camera
+                        </p>
+                        <p class="card-text" th:unless="${camera.isAnalog}">
+                            Digital Camera
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Year </span>
+
+                            <span th:unless="${camera.yearReleased == null}">
+                                [[*{yearReleased.getYear()}]]
+                            </span>
+                            <span th:unless="${camera.yearDiscontinued == null}">
+                                <span> - </span>
+                                [[*{yearDiscontinued.getYear()}]]
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Mount </span>
+                            [[*{mount.getName()}]]
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Body Type </span>
+                            [[*{type}]]
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Format </span>
+                            [[*{format}]]
+                        </p>
+                        <p class="card-text" th:unless="${camera.minShutterSpeed == null}">
+                            <span class="fw-bold">Minimum Shutter Speed </span>
+                            [[*{minShutterSpeed}]]
+                        </p>
+                        <p class="card-text" th:unless="${camera.maxShutterSpeed == null}">
+                            <span class="fw-bold">Maximum Shutter Speed </span>
+                            [[*{maxShutterSpeed}]]
+                        </p>
+                        <p class="card-text" th:unless="${camera.minIso == null}">
+                            <span class="fw-bold">Minimum ISO </span>
+                            [[*{minIso}]]
+                        </p>
+                        <p class="card-text" th:unless="${camera.maxIso == null}">
+                            <span class="fw-bold">Maximum ISO </span>
+                            [[*{maxIso}]]
+                        </p>
+                        <p class="card-text" th:unless="${camera.sensorResolution == null}">
+                            <span class="fw-bold">Resolution </span>
+                            [[*{sensorResolution}]]
+                        </p>
+                        <p class="card-text" th:if="${camera.videoCapable}">
+                            Video Capable
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>

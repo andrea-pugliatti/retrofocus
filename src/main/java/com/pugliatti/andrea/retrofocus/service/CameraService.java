@@ -1,6 +1,7 @@
 package com.pugliatti.andrea.retrofocus.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,15 @@ public class CameraService {
         return findByNameContaining(name);
     }
 
+    public Optional<Camera> findById(Integer id) {
+        return repo.findById(id);
+    }
+
+    public Boolean existsById(Integer id) {
+        return repo.existsById(id);
+    }
+
+    public Camera getById(Integer id) {
+        return findById(id).get();
+    }
 }
