@@ -2,12 +2,19 @@ package com.pugliatti.andrea.retrofocus.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.service.CameraService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/cameras")
@@ -33,6 +40,28 @@ public class CameraController {
 
         model.addAttribute("camera", service.getById(cameraId));
         return "cameras/show";
+    }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("camera", new Camera());
+        model.addAttribute("edit", false);
+        model.addAttribute("mounts", service.findAllMounts());
+        return "cameras/edit";
+    }
+
+    @PostMapping("/create")
+    public String store(
+            @Valid @ModelAttribute("camera") Camera formCamera,
+            BindingResult bindingResult,
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("edit", false);
+            model.addAttribute("mounts", service.findAllMounts());
+            return "/cameras/edit";
+        }
+        service.save(formCamera);
+        return "redirect:/cameras";
     }
 
 }

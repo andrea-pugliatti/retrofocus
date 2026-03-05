@@ -6,22 +6,25 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.pugliatti.andrea.retrofocus.model.Camera;
+import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 
 @Service
 public class CameraService {
-    private CameraRepository repo;
+    private CameraRepository cameraRepository;
+    private MountService mountRepository;
 
-    public CameraService(CameraRepository cameraRepository) {
-        this.repo = cameraRepository;
+    public CameraService(CameraRepository cameraRepository, MountService mountRepository) {
+        this.cameraRepository = cameraRepository;
+        this.mountRepository = mountRepository;
     }
 
     public List<Camera> findAll() {
-        return repo.findAll();
+        return cameraRepository.findAll();
     }
 
     public List<Camera> findByNameContaining(String name) {
-        return repo.findByNameContaining(name);
+        return cameraRepository.findByNameContaining(name);
     }
 
     public List<Camera> findAllOrByNameContaining(String name) {
@@ -32,14 +35,22 @@ public class CameraService {
     }
 
     public Optional<Camera> findById(Integer id) {
-        return repo.findById(id);
+        return cameraRepository.findById(id);
     }
 
     public Boolean existsById(Integer id) {
-        return repo.existsById(id);
+        return cameraRepository.existsById(id);
     }
 
     public Camera getById(Integer id) {
         return findById(id).get();
+    }
+
+    public List<Mount> findAllMounts() {
+        return mountRepository.findAll();
+    }
+
+    public Camera save(Camera camera) {
+        return cameraRepository.save(camera);
     }
 }

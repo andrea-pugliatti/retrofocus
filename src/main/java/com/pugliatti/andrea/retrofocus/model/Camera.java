@@ -38,15 +38,18 @@ public class Camera {
     private String image;
 
     @PastOrPresent(message = "The year of release must be in the past.")
+    @NotNull(message = "The year of release must be inserted.")
     private LocalDate yearReleased;
 
     @PastOrPresent(message = "The year of discontinuation must be in the past.")
     private LocalDate yearDiscontinued;
 
     @Size(max = 30, message = "The camera type must be at most 30 characters.")
+    @NotBlank(message = "The type must not be blank or null.")
     private String type;
 
     @Size(max = 30, message = "The camera format must be at most 30 characters.")
+    @NotBlank(message = "The format must not be blank or null.")
     private String format;
 
     @Size(max = 30, message = "The shutter speed field must be at most 30 characters.")

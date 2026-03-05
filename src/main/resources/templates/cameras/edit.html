@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head('New')}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('cameras')}" />
+
+    <main class="container">
+        <h3 class="text-center my-3" th:text="${edit ? 'Update camera' : 'Create new camera'}"></h3>
+
+        <form class="mb-5 px-5" th:action="@{/cameras/create}" method="post" th:object="${camera}">
+            <div class="mb-3">
+                <label class="form-label" for="input-name">Name: </label>
+                <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="input-description">Description: </label>
+                <textarea id="input-description" class="form-control" type="text" th:field="*{description}"
+                    rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="input-image">Image/URL: </label>
+                <input id="input-image" class="form-control" type="text" th:field="*{image}">
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" th:value="*{isAnalog}" th:field="*{isAnalog}"
+                    id="check-analog">
+                <label class="form-check-label" for="check-analog">
+                    Is the camera Analog?
+                </label>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="input-release">Year Released: </label>
+                    <input id="input-release" class="form-control" type="date" min="1800-01-01" max="2200-01-01"
+                        th:field="*{yearReleased}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('yearReleased')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('yearReleased')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="input-discontinued">Year Discontinued: </label>
+                    <input id="input-discontinued" class="form-control" type="date" min="1800-01-01" max="2200-01-01"
+                        th:field="*{yearDiscontinued}" th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('yearDiscontinued')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('yearDiscontinued')}" th:text="${err}" />
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col">
+                    <label class="form-label" for="input-type">Type: </label>
+                    <input id="input-type" class="form-control" type="text" th:field="*{type}"
+                        th:errorClass="is-invalid">
+                    <div th:if="${#fields.hasErrors('type')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('type')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label class="form-label" for="input-format">Format: </label>
+                    <input id="input-format" class="form-control" type="text" th:field="*{format}">
+                    <div th:if="${#fields.hasErrors('format')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('format')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col">
+
+                </div>
+
+            </div>
+            <div class="mb-3">
+
+                <select class="form-select" aria-label="Mount selection" th:field="*{mount}" th:errorClass="is-invalid">
+                    <option value="" selected>Mounts</option>
+                    <option th:each="mount: ${mounts}" th:value="${mount.id}">
+                        [[${mount.getName()}]]
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('mount')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('mount')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="input-min-shutter">Minimum Shutter Speed: </label>
+                    <input id="input-min-shutter" class="form-control" type="text" th:field="*{minShutterSpeed}">
+                    <div th:if="${#fields.hasErrors('minShutterSpeed')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('minShutterSpeed')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="input-max-shutter">Maximum Shutter Speed: </label>
+                    <input id="input-max-shutter" class="form-control" type="text" th:field="*{maxShutterSpeed}">
+                    <div th:if="${#fields.hasErrors('maxShutterSpeed')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('maxShutterSpeed')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="input-min-iso">Minimum ISO: </label>
+                    <input id="input-min-iso" class="form-control" type="number" th:field="*{minIso}">
+                    <div th:if="${#fields.hasErrors('minIso')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('minIso')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="input-max-iso">Maximum ISO: </label>
+                    <input id="input-max-iso" class="form-control" type="number" th:field="*{maxIso}">
+                    <div th:if="${#fields.hasErrors('maxIso')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('maxIso')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" th:value="*{videoCapable}" th:field="*{videoCapable}"
+                    id="check-video">
+                <label class="form-check-label" for="check-video">
+                    Is the camera video capable?
+                </label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="input-resolution">Sensor Resolution: </label>
+                <input id="input-resolution" class="form-control" type="text" th:field="*{sensorResolution}"
+                    th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('sensorResolution')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('sensorResolution')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>
