@@ -1,14 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee</title>
-</head>
+<head th:replace="~{fragments/fragments :: head('Lenses')}" />
 
 <body>
-    <h1>Funziona?</h1>
+    <div th:replace="~{fragments/header :: header('lenses')}" />
+
+    <main class="container mb-5">
+        <h3 class="my-3">Lenses</h3>
+
+        <div class="my-3">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex mb-3" th:action="@{/lenses}">
+                    <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
+                        placeholder="Search...">
+                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                </form>
+
+                <div class="ms-3">
+                    <a class="btn btn-primary" th:href="@{/lenses/create}">Add lens</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="text-center fs-5 fw-700" th:unless="${lenses.size() > 0}">
+            There are no lenses available.
+        </div>
+
+        <table class="table" th:if="${lenses.size() > 0}">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mount</th>
+                    <th scope="col">Release Year</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lens: ${lenses}" th:object="${lens}">
+                    <th scope="row">[[*{id}]]</th>
+                    <td>[[*{name}]]</td>
+                    <td>[[*{mount.name}]]</td>
+                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
+                            Show
+                        </a>
+                        <a class="btn btn-success btn-sm" th:href="@{/lenses/edit/{id}(id = *{id})}">
+                            Update
+                        </a>
+                        <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                        <div th:replace="~{fragments/modal :: modal(*{name}, 'lenses', *{id})}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>
 
 </html>
