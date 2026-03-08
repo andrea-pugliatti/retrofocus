@@ -1,14 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee</title>
-</head>
+<head th:replace="~{fragments/fragments :: head('Mounts')}" />
 
 <body>
-    <h1>Funziona?</h1>
+    <div th:replace="~{fragments/header :: header('mounts')}" />
+
+    <main class="container mb-5">
+        <h3 class="my-3">Mounts</h3>
+
+        <div class="my-3">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex mb-3" th:action="@{/mounts}">
+                    <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
+                        placeholder="Search...">
+                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                </form>
+
+                <div class="ms-3">
+                    <a class="btn btn-primary" th:href="@{/mounts/create}">Add mount</a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="text-center fs-5 fw-700" th:unless="${mounts.size() > 0}">
+            There are no mounts available.
+        </div>
+
+        <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-4" th:if="${mounts.size() > 0}">
+
+            <div class="col" th:each="mount: ${mounts}" th:object="${mount}">
+                <div class="card">
+                    <div class="card-body" style="min-height: 200px;">
+                        <div class="my-2 fs-5 fw-bold">[[*{name}]]</div>
+                        <div class="my-2">[[*{description}]]</div>
+                        <div class="my-2">
+
+                            <a class="btn btn-primary btn-sm" th:href="@{/mounts/{id}(id = *{id})}">
+                                Show
+                            </a>
+                            <a class="btn btn-success btn-sm" th:href="@{/mounts/edit/{id}(id = *{id})}">
+                                Update
+                            </a>
+                            <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                            <div th:replace="~{fragments/modal :: modal(*{name}, 'mounts', *{id})}" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>
 
 </html>
