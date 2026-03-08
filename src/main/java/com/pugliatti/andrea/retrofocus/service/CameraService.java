@@ -57,4 +57,8 @@ public class CameraService {
     public Camera edit(Camera camera) {
         return cameraRepository.save(camera);
     }
+
+    public void deleteById(Integer id) {
+        cameraRepository.deleteById(id);
+    }
 }

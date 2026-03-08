@@ -52,7 +52,8 @@
                         <a class="btn btn-success btn-sm" th:href="@{/cameras/edit/{id}(id = *{id})}">
                             Update
                         </a>
-
+                        <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                        <div th:replace="~{fragments/modal :: modal(*{name}, 'cameras', *{id})}" />
                     </td>
                 </tr>
             </tbody>

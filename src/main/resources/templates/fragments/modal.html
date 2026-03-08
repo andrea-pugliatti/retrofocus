@@ -9,7 +9,7 @@
         </button>
     </th:block>
 
-    <th:block th:fragment="modal(title, id)">
+    <th:block th:fragment="modal(title, type, id)">
         <div class="modal fade" th:id="'deleteModal-' + ${id}" tabindex="-1" aria-labelledby="deleteModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -23,7 +23,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                        <form style="display: inline;" th:action="@{/pizzas/delete/{id}(id = ${id})}" method="post">
+                        <form style="display: inline;" th:action="@{/{type}/delete/{id}(type = ${type}, id = ${id})}"
+                            method="post">
                             <button type="submit" class="btn btn-danger">Elimina</button>
                         </form>
                     </div>

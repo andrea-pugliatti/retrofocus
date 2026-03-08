@@ -73,6 +73,14 @@
                         <p class="card-text" th:if="${camera.videoCapable}">
                             Video Capable
                         </p>
+                        <div class="d-flex justify-content-around">
+                            <a class="btn btn-success btn-sm" th:href="@{/cameras/edit/{id}(id = *{id})}">
+                                Update
+                            </a>
+                            <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                            <div th:replace="~{fragments/modal :: modal(*{name}, 'cameras', *{id})}" />
+                        </div>
+
                     </div>
                 </div>
 

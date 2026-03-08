@@ -92,4 +92,10 @@ public class CameraController {
         return "redirect:/cameras/" + camera.getId();
     }
 
+    @PostMapping("/delete/{id}")
+    public String postMethodName(@PathVariable(name = "id") Integer cameraId) {
+        service.deleteById(cameraId);
+        return "redirect:/cameras";
+    }
+
 }
