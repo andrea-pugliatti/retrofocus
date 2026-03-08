@@ -53,4 +53,8 @@ public class CameraService {
     public Camera save(Camera camera) {
         return cameraRepository.save(camera);
     }
+
+    public Camera edit(Camera camera) {
+        return cameraRepository.save(camera);
+    }
 }

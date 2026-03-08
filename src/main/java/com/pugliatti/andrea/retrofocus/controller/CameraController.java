@@ -64,4 +64,32 @@ public class CameraController {
         return "redirect:/cameras";
     }
 
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable(name = "id") Integer cameraId) {
+        if (!service.existsById(cameraId)) {
+            model.addAttribute("camera", new Camera());
+            model.addAttribute("edit", false);
+        } else {
+            model.addAttribute("camera", service.getById(cameraId));
+            model.addAttribute("edit", true);
+        }
+
+        model.addAttribute("mounts", service.findAllMounts());
+        return "cameras/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String postMethodName(
+            Model model,
+            @Valid @ModelAttribute(name = "camera") Camera formCamera,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("edit", true);
+            model.addAttribute("mounts", service.findAllMounts());
+            return "cameras/edit";
+        }
+        Camera camera = service.edit(formCamera);
+        return "redirect:/cameras/" + camera.getId();
+    }
+
 }
