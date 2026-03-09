@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head(${mount.name})}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('mounts')}" />
+
+    <main class="container d-flex flex-column align-items-center">
+        <h1 class="my-3">
+            [[${mount.name}]]
+        </h1>
+
+        <p class="mb-3">
+            [[${mount.description}]]
+        </p>
+
+        <div class="d-flex justify-content-around mb-3">
+            <a class="btn btn-success btn-sm mx-3" th:href="@{/mounts/edit/{id}(id = ${mount.id})}">
+                Update
+            </a>
+            <div th:replace="~{fragments/modal :: trigger(${mount.id})}" />
+            <div th:replace="~{fragments/modal :: modal(${mount.name}, 'lenses', ${mount.id})}" />
+        </div>
+
+        <h2 class="my-3 align-self-start">
+            Cameras with this mount
+        </h2>
+
+        <div class="text-center fs-5 fw-700" th:unless="${cameras.size() > 0}">
+            There are no cameras available.
+        </div>
+
+        <table class="table" th:if="${cameras.size() > 0}">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Format</th>
+                    <th scope="col">Release Year</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="camera: ${cameras}" th:object="${camera}">
+                    <th scope="row">[[*{id}]]</th>
+                    <td>[[*{name}]]</td>
+                    <td>[[*{type}]]</td>
+                    <td>[[*{format}]]</td>
+                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/cameras/{id}(id = *{id})}">
+                            Show
+                        </a>
+                        <a class="btn btn-success btn-sm" th:href="@{/cameras/edit/{id}(id = *{id})}">
+                            Update
+                        </a>
+                        <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                        <div th:replace="~{fragments/modal :: modal(*{name}, 'cameras', *{id})}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="my-3 align-self-start">
+            Lenses with this mount
+        </h2>
+
+        <div class="text-center fs-5 fw-700" th:unless="${lenses.size() > 0}">
+            There are no lenses available.
+        </div>
+
+        <table class="table" th:if="${lenses.size() > 0}">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mount</th>
+                    <th scope="col">Release Year</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lens: ${lenses}" th:object="${lens}">
+                    <th scope="row">[[*{id}]]</th>
+                    <td>[[*{name}]]</td>
+                    <td>[[*{mount.name}]]</td>
+                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
+                            Show
+                        </a>
+                        <a class="btn btn-success btn-sm" th:href="@{/lenses/edit/{id}(id = *{id})}">
+                            Update
+                        </a>
+                        <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                        <div th:replace="~{fragments/modal :: modal(*{name}, 'lenses', *{id})}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>

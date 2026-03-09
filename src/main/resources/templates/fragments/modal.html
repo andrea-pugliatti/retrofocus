@@ -5,7 +5,7 @@
     <th:block th:fragment="trigger(id)">
         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
             th:data-bs-target="'#deleteModal-' + ${id}">
-            Elimina
+            Delete
         </button>
     </th:block>
 
@@ -15,17 +15,17 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalLabel">Elimina [[${title}]]</h1>
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete [[${title}]]</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Sei veramente sicuro di voler eliminare "[[${title}]]"?
+                        Are you sure you want to delete "[[${title}]]"?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <form style="display: inline;" th:action="@{/{type}/delete/{id}(type = ${type}, id = ${id})}"
                             method="post">
-                            <button type="submit" class="btn btn-danger">Elimina</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
