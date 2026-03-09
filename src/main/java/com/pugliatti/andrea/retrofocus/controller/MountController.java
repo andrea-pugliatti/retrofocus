@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.service.MountService;
@@ -25,8 +26,9 @@ public class MountController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("mounts", service.findAll());
+    public String index(Model model, @RequestParam(value = "q", required = false) String name) {
+        model.addAttribute("mounts", service.findAllOrByNameContaining(name));
+        model.addAttribute("query", name);
         return "mounts/index";
     }
 

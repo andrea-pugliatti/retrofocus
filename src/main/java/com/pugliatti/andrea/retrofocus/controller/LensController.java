@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pugliatti.andrea.retrofocus.model.Lens;
 import com.pugliatti.andrea.retrofocus.service.LensService;
@@ -25,8 +26,9 @@ public class LensController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("lenses", service.findAll());
+    public String index(Model model, @RequestParam(value = "q", required = false) String name) {
+        model.addAttribute("lenses", service.findAllOrByNameContaining(name));
+        model.addAttribute("query", name);
         return "lenses/index";
     }
 

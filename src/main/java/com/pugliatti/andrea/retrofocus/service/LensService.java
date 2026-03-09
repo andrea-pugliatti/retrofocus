@@ -24,6 +24,17 @@ public class LensService {
         return lensRepository.findAll();
     }
 
+    public List<Lens> findByNameContaining(String name) {
+        return lensRepository.findByNameContaining(name);
+    }
+
+    public List<Lens> findAllOrByNameContaining(String name) {
+        if (name == null) {
+            return findAll();
+        }
+        return findByNameContaining(name);
+    }
+
     public Optional<Lens> findById(Integer id) {
         return lensRepository.findById(id);
     }

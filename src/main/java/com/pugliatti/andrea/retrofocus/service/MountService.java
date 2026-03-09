@@ -31,6 +31,17 @@ public class MountService {
         return mountRepository.findAll();
     }
 
+    public List<Mount> findByNameContaining(String name) {
+        return mountRepository.findByNameContaining(name);
+    }
+
+    public List<Mount> findAllOrByNameContaining(String name) {
+        if (name == null) {
+            return findAll();
+        }
+        return findByNameContaining(name);
+    }
+
     public Optional<Mount> findById(Integer id) {
         return mountRepository.findById(id);
     }
