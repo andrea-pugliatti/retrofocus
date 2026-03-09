@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pugliatti.andrea.retrofocus.service.LensService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/lenses")
@@ -21,6 +22,15 @@ public class LensController {
     public String index(Model model) {
         model.addAttribute("lenses", service.findAll());
         return "lenses/index";
+    }
+
+    @GetMapping("/{id}")
+    public String getMethodName(@PathVariable Integer id, Model model) {
+        if (!service.existsById(id)) {
+            return "redirect:/lenses/index";
+        }
+        model.addAttribute("lens", service.getById(id));
+        return "lenses/show";
     }
 
 }

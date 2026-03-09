@@ -1,6 +1,7 @@
 package com.pugliatti.andrea.retrofocus.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,18 @@ public class LensService {
 
     public List<Lens> findAll() {
         return repo.findAll();
+    }
+
+    public Optional<Lens> findById(Integer id) {
+        return repo.findById(id);
+    }
+
+    public Lens getById(Integer id) {
+        return findById(id).get();
+    }
+
+    public Boolean existsById(Integer id) {
+        return repo.existsById(id);
     }
 
 }

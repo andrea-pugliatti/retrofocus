@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head(${lens.name})}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('lenses')}" />
+
+    <main class="container d-flex flex-column align-items-center">
+
+        <div class="card my-5" th:object="${lens}">
+            <div class="card-body">
+                <h3 class="card-title">
+                    [[*{name}]]
+                </h3>
+                <p class="card-text">
+                    [[*{description}]]
+                </p>
+                <p class="card-text">
+                    <span class="fw-bold">Autofocus </span>
+                    <span th:if="${lens.isAutofocus}">Yes</span>
+                    <span th:unless="${lens.isAutofocus}">No</span>
+                </p>
+                <p class="card-text" th:unless="${lens.yearReleased == null}">
+                    <span class="fw-bold">Year Released </span>
+                    [[*{yearReleased.getYear()}]]
+                </p>
+                <p class="card-text">
+                    <span class="fw-bold">Mount </span>
+                    [[*{mount.getName()}]]
+                </p>
+                <p class="card-text" th:unless="${lens.minFocalLength == null}">
+                    <span class="fw-bold">Minimum Focal Length </span>
+                    [[*{minFocalLength}]]
+                </p>
+                <p class="card-text" th:unless="${lens.maxFocalLength == null}">
+                    <span class="fw-bold">Maximum Focal Length </span>
+                    [[*{maxFocalLength}]]
+                </p>
+                <p class="card-text" th:unless="${lens.minAperture == null}">
+                    <span class="fw-bold">Minimum Aperture </span>
+                    [[*{minAperture}]]
+                </p>
+                <p class="card-text" th:unless="${lens.maxAperture == null}">
+                    <span class="fw-bold">Maximum Aperture </span>
+                    [[*{maxAperture}]]
+                </p>
+                <div class="d-flex justify-content-around">
+                    <a class="btn btn-success btn-sm" th:href="@{/lenses/edit/{id}(id = *{id})}">
+                        Update
+                    </a>
+                    <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                    <div th:replace="~{fragments/modal :: modal(*{name}, 'lenses', *{id})}" />
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>
