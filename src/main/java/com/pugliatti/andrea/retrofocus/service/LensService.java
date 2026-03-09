@@ -11,9 +11,8 @@ import com.pugliatti.andrea.retrofocus.repository.LensRepository;
 
 @Service
 public class LensService {
-
-    private MountRepository mountRepository;
-    private LensRepository lensRepository;
+    private final MountRepository mountRepository;
+    private final LensRepository lensRepository;
 
     public LensService(LensRepository lensRepository, MountRepository mountRepository) {
         this.lensRepository = lensRepository;

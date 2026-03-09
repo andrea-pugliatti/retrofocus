@@ -14,11 +14,9 @@ import com.pugliatti.andrea.retrofocus.repository.MountRepository;
 
 @Service
 public class MountService {
-
     private final LensRepository lensRepository;
-
     private final CameraRepository cameraRepository;
-    private MountRepository mountRepository;
+    private final MountRepository mountRepository;
 
     public MountService(MountRepository mountRepository, CameraRepository cameraRepository,
             LensRepository lensRepository) {

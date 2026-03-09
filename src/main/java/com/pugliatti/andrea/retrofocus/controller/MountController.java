@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/mounts")
 public class MountController {
-    private MountService service;
+    private final MountService service;
 
     public MountController(MountService mountService) {
         this.service = mountService;

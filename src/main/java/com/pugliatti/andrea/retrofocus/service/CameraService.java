@@ -11,8 +11,8 @@ import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 
 @Service
 public class CameraService {
-    private CameraRepository cameraRepository;
-    private MountService mountRepository;
+    private final CameraRepository cameraRepository;
+    private final MountService mountRepository;
 
     public CameraService(CameraRepository cameraRepository, MountService mountRepository) {
         this.cameraRepository = cameraRepository;

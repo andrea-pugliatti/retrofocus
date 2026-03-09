@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/cameras")
 public class CameraController {
-    private CameraService service;
+    private final CameraService service;
 
     public CameraController(CameraService cameraService) {
         this.service = cameraService;

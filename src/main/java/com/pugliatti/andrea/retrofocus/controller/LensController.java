@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/lenses")
 public class LensController {
-    private LensService service;
+    private final LensService service;
 
     public LensController(LensService lensService) {
         this.service = lensService;
@@ -33,7 +33,7 @@ public class LensController {
     }
 
     @GetMapping("/{id}")
-    public String getMethodName(@PathVariable Integer id, Model model) {
+    public String show(@PathVariable Integer id, Model model) {
         if (!service.existsById(id)) {
             return "redirect:/lenses/index";
         }
