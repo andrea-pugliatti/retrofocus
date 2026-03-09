@@ -50,4 +50,16 @@ public class MountService {
     public List<Lens> findAllLenses(Mount mount) {
         return lensRepository.findByMount(mount);
     }
+
+    public Mount save(Mount mount) {
+        return mountRepository.save(mount);
+    }
+
+    public Mount edit(Mount mount) {
+        return mountRepository.save(mount);
+    }
+
+    public void deleteById(Integer id) {
+        mountRepository.deleteById(id);
+    }
 }
