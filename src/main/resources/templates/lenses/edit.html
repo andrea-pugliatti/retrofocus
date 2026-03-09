@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head('New lens')}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('lenses')}" />
+
+    <main class="container">
+        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + lens.name : 'Add new Lens'}"></h3>
+
+        <form class="mb-5 px-5" th:object="${lens}" th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}"
+            method="post">
+            <div class="mb-3">
+                <label class="form-label" for="input-name">Name: </label>
+                <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="input-description">Description: </label>
+                <textarea id="input-description" class="form-control" type="text" th:field="*{description}"
+                    rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="input-release">Year Released: </label>
+                <input id="input-release" class="form-control" type="date" min="1800-01-01" max="2200-01-01"
+                    th:value="*{yearReleased}" th:field="*{yearReleased}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('yearReleased')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('yearReleased')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" th:value="*{isAutofocus}" th:field="*{isAutofocus}"
+                    id="check-autofocus">
+                <label class="form-check-label" for="check-autofocus">
+                    Does it have autofocus?
+                </label>
+            </div>
+
+            <div class="mb-3">
+
+                <select class="form-select" aria-label="Mount selection" th:field="*{mount}" th:errorClass="is-invalid">
+                    <option value="" selected>Mounts</option>
+                    <option th:each="mount: ${mounts}" th:value="${mount.id}">
+                        [[${mount.getName()}]]
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('mount')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('mount')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="input-min-focal-length">Minimum Focal Length: </label>
+                    <input id="input-min-focal-length" class="form-control" type="text" th:field="*{minFocalLength}">
+                    <div th:if="${#fields.hasErrors('minFocalLength')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('minFocalLength')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="input-max-focal-length">Maximum Focal Length: </label>
+                    <input id="input-max-focal-length" class="form-control" type="text" th:field="*{maxFocalLength}">
+                    <div th:if="${#fields.hasErrors('maxFocalLength')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('maxFocalLength')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="input-min-aperture">Minimum Aperture: </label>
+                    <input id="input-min-aperture" class="form-control" type="number" th:field="*{minAperture}">
+                    <div th:if="${#fields.hasErrors('minAperture')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('minAperture')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <label class="form-label" for="input-max-aperture">Maximum Aperture: </label>
+                    <input id="input-max-aperture" class="form-control" type="number" th:field="*{maxAperture}">
+                    <div th:if="${#fields.hasErrors('maxAperture')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('maxAperture')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" th:text="${edit ? 'Edit' : 'Create'}"></button>
+        </form>
+
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>

@@ -2,26 +2,30 @@ package com.pugliatti.andrea.retrofocus.service;
 
 import java.util.List;
 import java.util.Optional;
-
+import com.pugliatti.andrea.retrofocus.repository.MountRepository;
 import org.springframework.stereotype.Service;
 
 import com.pugliatti.andrea.retrofocus.model.Lens;
+import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.LensRepository;
 
 @Service
 public class LensService {
-    private LensRepository repo;
 
-    public LensService(LensRepository lensRepository) {
-        this.repo = lensRepository;
+    private MountRepository mountRepository;
+    private LensRepository lensRepository;
+
+    public LensService(LensRepository lensRepository, MountRepository mountRepository) {
+        this.lensRepository = lensRepository;
+        this.mountRepository = mountRepository;
     }
 
     public List<Lens> findAll() {
-        return repo.findAll();
+        return lensRepository.findAll();
     }
 
     public Optional<Lens> findById(Integer id) {
-        return repo.findById(id);
+        return lensRepository.findById(id);
     }
 
     public Lens getById(Integer id) {
@@ -29,7 +33,22 @@ public class LensService {
     }
 
     public Boolean existsById(Integer id) {
-        return repo.existsById(id);
+        return lensRepository.existsById(id);
     }
 
+    public List<Mount> findAllMounts() {
+        return mountRepository.findAll();
+    }
+
+    public Lens save(Lens lens) {
+        return lensRepository.save(lens);
+    }
+
+    public Lens edit(Lens lens) {
+        return lensRepository.save(lens);
+    }
+
+    public void deleteById(Integer id) {
+        lensRepository.deleteById(id);
+    }
 }

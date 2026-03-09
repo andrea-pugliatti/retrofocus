@@ -60,8 +60,8 @@ public class CameraController {
             model.addAttribute("mounts", service.findAllMounts());
             return "/cameras/edit";
         }
-        service.save(formCamera);
-        return "redirect:/cameras";
+        Camera camera = service.save(formCamera);
+        return "redirect:/cameras/" + camera.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -79,7 +79,7 @@ public class CameraController {
     }
 
     @PostMapping("/edit/{id}")
-    public String postMethodName(
+    public String update(
             Model model,
             @Valid @ModelAttribute(name = "camera") Camera formCamera,
             BindingResult bindingResult) {
@@ -93,7 +93,7 @@ public class CameraController {
     }
 
     @PostMapping("/delete/{id}")
-    public String postMethodName(@PathVariable(name = "id") Integer cameraId) {
+    public String delete(@PathVariable(name = "id") Integer cameraId) {
         service.deleteById(cameraId);
         return "redirect:/cameras";
     }
