@@ -27,6 +27,12 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="input-image">Image/URL: </label>
+                <input id="input-image" class="form-control" type="text" th:field="*{image}">
+            </div>
+
+
+            <div class="mb-3">
                 <label class="form-label" for="input-release">Year Released: </label>
                 <input id="input-release" class="form-control" type="date" min="1800-01-01" max="2200-01-01"
                     th:value="*{yearReleased}" th:field="*{yearReleased}" th:errorClass="is-invalid">

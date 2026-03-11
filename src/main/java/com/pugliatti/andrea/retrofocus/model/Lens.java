@@ -2,6 +2,8 @@ package com.pugliatti.andrea.retrofocus.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.constraints.URL;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -29,6 +31,9 @@ public class Lens {
 
     @Lob
     private String description;
+
+    @URL(message = "Insert a valid url.")
+    private String image;
 
     @PastOrPresent(message = "The year of release must be in the past.")
     private LocalDate yearReleased;
@@ -75,6 +80,14 @@ public class Lens {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public LocalDate getYearReleased() {
