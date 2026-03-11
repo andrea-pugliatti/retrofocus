@@ -11,7 +11,7 @@
         <div class="card my-5" th:object="${camera}">
             <div class="row g-0">
                 <div class="col-md-8">
-                    <img th:src="*{image}" class="img-fluid rounded-start" alt="">
+                    <img th:src="|/images/*{image}|" class="img-fluid rounded-start" alt="">
                 </div>
                 <div class="col-md-4" style="min-width: fit-content;">
                     <div class="card-body">
@@ -73,7 +73,7 @@
                         <p class="card-text" th:if="${camera.videoCapable}">
                             Video Capable
                         </p>
-                        <div class="d-flex justify-content-around">
+                        <div class="">
                             <a class="btn btn-success btn-sm" th:href="@{/cameras/edit/{id}(id = *{id})}">
                                 Update
                             </a>
