@@ -7,11 +7,13 @@
     <div th:replace="~{fragments/header :: header('home')}" />
 
     <main class="container">
-        <div class="my-3 text-center">
-            <h1>
-                Home
-                <span class="text-primary">[[${username}]]</span>
-            </h1>
+        <div class="my-5 text-center">
+            <h2 class="my-3">Home <span class="playfair-font fs-1">RetroFocus</span></h2>
+            <h3 class="my-3">
+                Welcome back, <span class="text-warning">[[${username}]]</span>!
+            </h3>
+
+            <img class="my-5" height="300" th:src=@{/images/logo_camera.svg} alt="">
         </div>
     </main>
 

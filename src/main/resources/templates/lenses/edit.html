@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/header :: header('lenses')}" />
 
     <main class="container">
-        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + lens.name : 'Add new Lens'}"></h3>
+        <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + lens.name : 'Add new Lens'}"></h2>
 
         <form class="mb-5 px-5" th:object="${lens}" th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}"
             method="post">

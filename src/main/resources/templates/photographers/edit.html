@@ -7,7 +7,8 @@
     <div th:replace="~{fragments/header :: header('photographers')}" />
 
     <main class="container">
-        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + photographer.name : 'Add new Photographer'}"></h3>
+        <h2 class="text-center my-3 playfair-font"
+            th:text="${edit ? 'Edit ' + photographer.name : 'Add new Photographer'}"></h2>
 
         <form class="mb-5 px-5" th:object="${photographer}"
             th:action="${edit ? '/photographers/edit/' + photographer.id : '/photographers/create'}" method="post">

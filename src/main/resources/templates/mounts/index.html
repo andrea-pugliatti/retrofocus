@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/header :: header('mounts')}" />
 
     <main class="container mb-5">
-        <h3 class="my-3">Mounts</h3>
+        <h2 class="playfair-font my-3">Mounts</h2>
 
         <div class="my-3">
             <div class="d-flex justify-content-between">
@@ -34,7 +34,7 @@
             <div class="col" th:each="mount: ${mounts}" th:object="${mount}">
                 <div class="card">
                     <div class="card-body" style="min-height: 200px;">
-                        <div class="my-2 fs-5 fw-bold">[[*{name}]]</div>
+                        <div class="my-2 playfair-font fs-4 fw-bold">[[*{name}]]</div>
                         <div class="my-2">[[*{description}]]</div>
                         <div class="my-2">
 

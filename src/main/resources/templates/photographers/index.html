@@ -7,7 +7,7 @@
     <div th:replace="~{fragments/header :: header('photographers')}" />
 
     <main class="container mb-5">
-        <h3 class="my-3">Photographers</h3>
+        <h2 class="my-3 playfair-font">Photographers</h2>
 
         <div class="my-3">
             <div class="d-flex justify-content-between">
@@ -29,6 +29,7 @@
         <div class="text-center fs-5 fw-700" th:unless="${photographers.size() > 0}">
             There are no photographers available.
         </div>
+
         <table class="table" th:if="${photographers.size() > 0}">
             <thead>
                 <tr>

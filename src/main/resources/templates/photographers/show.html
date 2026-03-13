@@ -11,11 +11,11 @@
         <div class="card my-5" th:object="${photographer}">
             <div class="row g-0">
                 <div class="col-md-8">
-                    <img th:src="|/images/*{image}|" class="img-fluid rounded-start" alt="">
+                    <img th:src="|/images/*{image}|" height="400" class="rounded-start" alt="">
                 </div>
                 <div class="col-md-4" style="min-width: fit-content;">
                     <div class="card-body">
-                        <h3 class="card-title">
+                        <h3 class="card-title playfair-font">
                             [[*{name}]]
                         </h3>
                         <p class="card-text" th:unless="${photographer.biography == null}">
