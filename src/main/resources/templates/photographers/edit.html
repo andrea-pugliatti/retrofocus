@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head(${edit ? 'Edit ' + photographer.name : 'New Photographer'})}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('photographers')}" />
+
+    <main class="container">
+        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + photographer.name : 'Add new Photographer'}"></h3>
+
+        <form class="mb-5 px-5" th:object="${photographer}"
+            th:action="${edit ? '/photographers/edit/' + photographer.id : '/photographers/create'}" method="post">
+
+            <div class="mb-3">
+                <label class="form-label" for="input-name">Name: </label>
+                <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="input-description">Biography: </label>
+                <textarea id="input-description" class="form-control" type="text" th:field="*{biography}"
+                    rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="input-image">Image: </label>
+                <input id="input-image" class="form-control" type="text" th:field="*{image}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="input-release">Birthday: </label>
+                <input id="input-release" class="form-control" type="date" th:value="*{birthday}" th:field="*{birthday}"
+                    th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('birthday')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('birthday')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" th:text="${edit ? 'Edit' : 'Create'}"></button>
+        </form>
+
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>

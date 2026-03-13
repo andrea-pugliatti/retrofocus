@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head('Photographers')}" />
+
+<body>
+    <div th:replace="~{fragments/header :: header('photographers')}" />
+
+    <main class="container mb-5">
+        <h3 class="my-3">Photographers</h3>
+
+        <div class="my-3">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex mb-3" th:action="@{/photographers}">
+                    <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
+                        placeholder="Search...">
+                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                </form>
+
+                <div class="ms-3">
+                    <a class="btn btn-primary" th:href="@{/photographers/create}">
+                        Add photographer
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="text-center fs-5 fw-700" th:unless="${photographers.size() > 0}">
+            There are no photographers available.
+        </div>
+        <table class="table" th:if="${photographers.size() > 0}">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="photographer: ${photographers}" th:object="${photographer}">
+                    <th scope="row">[[*{id}]]</th>
+                    <td>[[*{name}]]</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/photographers/{id}(id = *{id})}">
+                            Show
+                        </a>
+                        <a class="btn btn-success btn-sm" th:href="@{/photographers/edit/{id}(id = *{id})}">
+                            Update
+                        </a>
+                        <div th:replace="~{fragments/modal :: trigger(*{id})}" />
+                        <div th:replace="~{fragments/modal :: modal(*{name}, 'photographers', *{id})}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="~{fragments/fragments :: bootstrap}" />
+</body>
+
+</html>
