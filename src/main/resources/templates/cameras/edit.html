@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/fragments :: head('New')}" />
+<head th:replace="~{fragments/fragments :: head(${edit ? 'Edit ' + camera.name : 'New camera'})}" />
 
 <body>
     <div th:replace="~{fragments/header :: header('cameras')}" />
 
     <main class="container">
-        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + camera.name : 'Create new camera'}"></h3>
+        <h3 class="text-center my-3" th:text="${edit ? 'Edit ' + camera.name : 'Add new camera'}"></h3>
 
         <form class="mb-5 px-5" th:object="${camera}" th:action="${edit ? '/cameras/edit/' + id : '/cameras/create'}"
             method="post">
@@ -26,7 +26,7 @@
                     rows="3"></textarea>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="input-image">Image/URL: </label>
+                <label class="form-label" for="input-image">Image: </label>
                 <input id="input-image" class="form-control" type="text" th:field="*{image}">
             </div>
 

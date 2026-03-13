@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/fragments :: head('New Mount')}" />
+<head th:replace="~{fragments/fragments :: head(${edit ? 'Edit ' + mount.name : 'New Mount'})}" />
 
 <body>
     <div th:replace="~{fragments/header :: header('mounts')}" />

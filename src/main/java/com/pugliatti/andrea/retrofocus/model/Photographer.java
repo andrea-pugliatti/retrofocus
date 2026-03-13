@@ -3,8 +3,6 @@ package com.pugliatti.andrea.retrofocus.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-import org.hibernate.validator.constraints.URL;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +29,7 @@ public class Photographer {
     @Size(min = 2, max = 50, message = "The name must be between 2 and 50 characters.")
     private String name;
 
-    @URL(message = "Insert a valid url.")
+    @Size(max = 70, message = "The image url must be at most 50 characters.")
     private String image;
 
     @Past(message = "The birthday must be in the past.")

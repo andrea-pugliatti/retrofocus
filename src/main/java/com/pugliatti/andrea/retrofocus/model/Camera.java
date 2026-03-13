@@ -3,8 +3,6 @@ package com.pugliatti.andrea.retrofocus.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -38,7 +36,7 @@ public class Camera {
     @Lob
     private String description;
 
-    @URL(message = "Insert a valid url.")
+    @Size(max = 70, message = "The image url must be at most 50 characters.")
     private String image;
 
     @PastOrPresent(message = "The year of release must be in the past.")
