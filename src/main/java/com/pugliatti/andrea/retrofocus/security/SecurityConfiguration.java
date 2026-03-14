@@ -18,6 +18,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(request -> request
                 .requestMatchers("/").hasAnyAuthority("ADMIN", "USER")
                 .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/images/**").permitAll()
                 .requestMatchers("/**").hasAnyAuthority("ADMIN", "USER"))
                 .formLogin(Customizer.withDefaults())
                 .cors(cors -> cors.disable())
