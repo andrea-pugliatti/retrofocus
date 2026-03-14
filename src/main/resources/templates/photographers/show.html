@@ -29,16 +29,24 @@
                         </p>
 
                         <div class="card-text" th:if="${photographer.cameras.size() > 0}">
-                            <p>Cameras used: </p>
-                            <ul>
-                                <li th:each="camera: *{cameras}">[[${camera.name}]]</li>
+                            <ul class="card-list">
+                                <div>Cameras used: </div>
+                                <li th:each="camera: *{cameras}">
+                                    <a class="btn btn-sm btn-warning" th:href=@{/cameras/{id}(id=${camera.id})}>
+                                        [[${camera.name}]]
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
                         <div class="card-text" th:if="${photographer.lenses.size() > 0}">
-                            <p>Lenses used: </p>
-                            <ul>
-                                <li th:each="lens: *{lenses}">[[${lens.name}]]</li>
+                            <ul class="card-list">
+                                <div>Lenses used: </div>
+                                <li th:each="lens: *{lenses}">
+                                    <a class="btn btn-sm btn-warning" th:href=@{/lenses/{id}(id=${lens.id})}>
+                                        [[${lens.name}]]
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
