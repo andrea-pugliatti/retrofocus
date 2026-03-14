@@ -11,20 +11,38 @@
         <div class="card my-5" th:object="${photographer}">
             <div class="row g-0">
                 <div class="col-md-8">
-                    <img th:src="|/images/*{image}|" height="400" class="rounded-start" alt="">
+                    <img th:src="|/images/*{image}|" class="img-fluid rounded-start" alt="">
                 </div>
-                <div class="col-md-4" style="min-width: fit-content;">
+
+                <div class="col-md-4">
                     <div class="card-body">
                         <h3 class="card-title playfair-font">
                             [[*{name}]]
                         </h3>
+
+                        <p class="card-text" th:unless="${photographer.birthday == null}">
+                            [[*{birthday.getYear()}]]
+                        </p>
+
                         <p class="card-text" th:unless="${photographer.biography == null}">
                             [[*{biography}]]
                         </p>
-                        <p class="card-text" th:unless="${photographer.birthday == null}">
-                            <span class="fw-bold">Birthday </span>
-                            [[*{birthday}]]
-                        </p>
+
+                        <div class="card-text" th:if="${photographer.cameras.size() > 0}">
+
+                            <p>Cameras used: </p>
+                            <ul th:each="camera: *{cameras}">
+                                <li>[[${camera.name}]]</li>
+                            </ul>
+                        </div>
+
+                        <div class="card-text" th:if="${photographer.lenses.size() > 0}">
+                            <p>Lenses used: </p>
+                            <ul th:each="lens: *{lenses}">
+                                <li>[[${lens.name}]]</li>
+                            </ul>
+                        </div>
+
                         <div>
                             <a class="btn btn-success btn-sm" th:href="@{/photographers/edit/{id}(id = *{id})}">
                                 Update
