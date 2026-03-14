@@ -46,6 +46,8 @@ public class PhotographerController {
     public String create(Model model) {
         model.addAttribute("photographer", new Photographer());
         model.addAttribute("edit", false);
+        model.addAttribute("cameras", service.findAllCameras());
+        model.addAttribute("lenses", service.findAllLenses());
         return "photographers/edit";
     }
 
@@ -56,6 +58,8 @@ public class PhotographerController {
             Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", false);
+            model.addAttribute("cameras", service.findAllCameras());
+            model.addAttribute("lenses", service.findAllLenses());
             return "photographers/edit";
         }
 
@@ -72,6 +76,8 @@ public class PhotographerController {
             model.addAttribute("edit", true);
             model.addAttribute("photographer", service.getById(id));
         }
+        model.addAttribute("cameras", service.findAllCameras());
+        model.addAttribute("lenses", service.findAllLenses());
         return "photographers/edit";
     }
 
@@ -82,6 +88,8 @@ public class PhotographerController {
             Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
+            model.addAttribute("cameras", service.findAllCameras());
+            model.addAttribute("lenses", service.findAllLenses());
             return "photographers/edit";
         }
 
