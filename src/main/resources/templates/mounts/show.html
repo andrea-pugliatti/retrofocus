@@ -36,9 +36,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Format</th>
-                    <th scope="col">Release Year</th>
+                    <th class="hide" scope="col">Type</th>
+                    <th class="hide" scope="col">Format</th>
+                    <th class="hide" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,9 +46,9 @@
                 <tr th:each="camera: ${cameras}" th:object="${camera}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td>[[*{type}]]</td>
-                    <td>[[*{format}]]</td>
-                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide">[[*{type}]]</td>
+                    <td class="hide">[[*{format}]]</td>
+                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-primary btn-sm" th:href="@{/cameras/{id}(id = *{id})}">
                             Show
@@ -76,8 +76,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Mount</th>
-                    <th scope="col">Release Year</th>
+                    <th class="hide" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -85,8 +84,7 @@
                 <tr th:each="lens: ${lenses}" th:object="${lens}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td>[[*{mount.name}]]</td>
-                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-primary btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show
@@ -101,8 +99,9 @@
             </tbody>
         </table>
 
-
     </main>
+
+    <div th:replace="~{fragments/footer :: footer()}" />
 
     <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>

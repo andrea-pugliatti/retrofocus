@@ -11,7 +11,7 @@
 
         <div class="my-3">
             <div class="d-flex justify-content-between">
-                <form class="d-flex mb-3" th:action="@{/lenses}">
+                <form class="column d-flex mb-3" th:action="@{/lenses}">
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
                     <button class="btn btn-primary ms-3" type="submit">Search</button>
@@ -33,8 +33,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Mount</th>
-                    <th scope="col">Release Year</th>
+                    <th class="hide" scope="col">Mount</th>
+                    <th class="hide" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -42,8 +42,8 @@
                 <tr th:each="lens: ${lenses}" th:object="${lens}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td>[[*{mount.name}]]</td>
-                    <td>[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide">[[*{mount.name}]]</td>
+                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-primary btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show
@@ -58,6 +58,8 @@
             </tbody>
         </table>
     </main>
+
+    <div th:replace="~{fragments/footer :: footer()}" />
 
     <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>

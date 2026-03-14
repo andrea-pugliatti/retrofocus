@@ -21,3 +21,40 @@ body {
 .bg-header {
   background-color: #fff9f1;
 }
+
+.checkbox-grid {
+  display: grid; 
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 0.5rem;
+  & > * {
+    padding-block: 0.5rem;
+    border: 1px solid rgba(112, 99, 92, 0.3);
+    border-radius: 5px;
+  }
+}
+
+.logo {
+  height: 300px;
+}
+
+@media screen and (max-width: 770px) {
+  .checkbox-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .column {
+    flex-direction: column;
+    & > * {
+      margin-bottom: 0.2rem;
+      margin-inline-end: 0.2rem;
+    }
+  }
+
+  .logo {
+    height: 200px;
+  }
+}

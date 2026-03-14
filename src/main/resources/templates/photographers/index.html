@@ -10,7 +10,7 @@
         <h2 class="my-3 playfair-font">Photographers</h2>
 
         <div class="my-3">
-            <div class="d-flex justify-content-between">
+            <div class="column d-flex justify-content-between">
                 <form class="d-flex mb-3" th:action="@{/photographers}">
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
@@ -56,6 +56,8 @@
             </tbody>
         </table>
     </main>
+
+    <div th:replace="~{fragments/footer :: footer()}" />
 
     <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>

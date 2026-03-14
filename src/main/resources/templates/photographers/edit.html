@@ -45,10 +45,72 @@
                 </div>
             </div>
 
+            <label class="form-label" for="select-cameras">Cameras used: </label>
+            <div id="select-cameras" class="mb-3 checkbox-grid">
+                <div class="form-check" th:each="camera: ${cameras}">
+                    <label>
+                        <input type="checkbox" name="camera-checkbox" th:value="${camera.id}" th:field="*{cameras}"
+                            th:errorClass="is-invalid"> [[${camera.name}]]
+                    </label>
+                </div>
+                <div th:if="${#fields.hasErrors('cameras')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('cameras')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div>
+
+            <label class="form-label" for="select-lenses">Lenses used: </label>
+            <div id="select-lenses" class="mb-3 checkbox-grid">
+                <div class="form-check" th:each="lens: ${lenses}">
+                    <label>
+                        <input type="checkbox" name="lens-checkbox" th:value="${lens.id}" th:field="*{lenses}"
+                            th:errorClass="is-invalid"> [[${lens.name}]]
+                    </label>
+                    <div th:if="${#fields.hasErrors('lenses')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('lenses')}" th:text="${err}" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="mb-3">
+                <label class="form-label" for="select-cameras">Cameras used: </label>
+                <select id="select-cameras" class="form-select" multiple aria-label="Cameras selection"
+                    th:field="*{cameras}" th:errorClass="is-invalid">
+                    <option value="">Select cameras </option>
+                    <option th:each="camera: ${cameras}" th:value="${camera.id}" th:text="${camera.name}">
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('cameras')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('cameras')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div> -->
+
+            <!-- <div class="mb-3">
+                <label class="form-label" for="select-lenses">Lenses used: </label>
+                <select id="select-lenses" class="form-select" aria-label="Lenses selection" th:field="*{lenses}"
+                    multiple th:errorClass="is-invalid">
+                    <option value="" selected>Select lenses </option>
+                    <option th:each="lens: ${lenses}" th:value="${lens.id}" th:text="${lens.name}">
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('lenses')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('lenses')}" th:text="${err}" />
+                    </ul>
+                </div>
+            </div> -->
+
             <button class="btn btn-primary" type="submit" th:text="${edit ? 'Edit' : 'Create'}"></button>
         </form>
 
     </main>
+
+    <div th:replace="~{fragments/footer :: footer()}" />
 
     <div th:replace="~{fragments/fragments :: bootstrap}" />
 </body>
