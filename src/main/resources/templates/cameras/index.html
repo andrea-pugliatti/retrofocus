@@ -12,6 +12,11 @@
         <div class="my-3">
             <div class="column d-flex justify-content-between">
                 <form class="d-flex mb-3" th:action="@{/cameras}">
+                    <select name="m" class="form-select me-3" style="width: auto;">
+                        <option value="">All Mounts</option>
+                        <option th:each="mount : ${mounts}" th:value="${mount.id}" th:text="${mount.name}"
+                            th:selected="${mount.id == mountId}"></option>
+                    </select>
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
                     <button class="btn btn-warning ms-3" type="submit">Search</button>

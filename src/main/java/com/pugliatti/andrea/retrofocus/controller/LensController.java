@@ -26,9 +26,14 @@ public class LensController {
     }
 
     @GetMapping
-    public String index(Model model, @RequestParam(value = "q", required = false) String name) {
-        model.addAttribute("lenses", service.findAllOrByNameContaining(name));
+    public String index(
+            Model model,
+            @RequestParam(value = "q", required = false) String name,
+            @RequestParam(value = "m", required = false) Integer mountId) {
+        model.addAttribute("lenses", service.findAllOrWithFilters(name, mountId));
+        model.addAttribute("mounts", service.findAllMounts());
         model.addAttribute("query", name);
+        model.addAttribute("mountId", mountId);
         return "lenses/index";
     }
 

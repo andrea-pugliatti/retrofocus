@@ -25,8 +25,10 @@ public class LensRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Lens>> index(@RequestParam(value = "q", required = false) String name) {
-        return new ResponseEntity<>(service.findAllOrByNameContaining(name), HttpStatus.OK);
+    public ResponseEntity<List<Lens>> index(
+            @RequestParam(value = "q", required = false) String name,
+            @RequestParam(value = "m", required = false) Integer mountId) {
+        return new ResponseEntity<>(service.findAllOrWithFilters(name, mountId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

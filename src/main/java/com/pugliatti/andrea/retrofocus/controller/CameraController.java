@@ -26,9 +26,14 @@ public class CameraController {
     }
 
     @GetMapping
-    public String index(Model model, @RequestParam(value = "q", required = false) String name) {
-        model.addAttribute("cameras", service.findAllOrByNameContaining(name));
+    public String index(
+            Model model,
+            @RequestParam(value = "q", required = false) String name,
+            @RequestParam(value = "m", required = false) Integer mountId) {
+        model.addAttribute("cameras", service.findAllOrWithFilters(name, mountId));
+        model.addAttribute("mounts", service.findAllMounts());
         model.addAttribute("query", name);
+        model.addAttribute("mountId", mountId);
         return "cameras/index";
     }
 

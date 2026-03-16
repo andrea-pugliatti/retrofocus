@@ -11,4 +11,6 @@ public interface CameraRepository extends JpaRepository<Camera, Integer> {
     public List<Camera> findByNameContaining(String name);
 
     public List<Camera> findByMount(Mount mount);
+
+    public List<Camera> findByNameContainingAndMount(String name, Mount mount);
 }

@@ -8,30 +8,31 @@ import org.springframework.stereotype.Service;
 import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
+import com.pugliatti.andrea.retrofocus.repository.MountRepository;
 
 @Service
 public class CameraService {
     private final CameraRepository cameraRepository;
-    private final MountService mountRepository;
+    private final MountRepository mountRepository;
 
-    public CameraService(CameraRepository cameraRepository, MountService mountRepository) {
+    public CameraService(CameraRepository cameraRepository, MountRepository mountRepository) {
         this.cameraRepository = cameraRepository;
         this.mountRepository = mountRepository;
     }
 
-    public List<Camera> findAll() {
-        return cameraRepository.findAll();
-    }
-
-    public List<Camera> findByNameContaining(String name) {
-        return cameraRepository.findByNameContaining(name);
-    }
-
-    public List<Camera> findAllOrByNameContaining(String name) {
-        if (name == null) {
-            return findAll();
+    public List<Camera> findAllOrWithFilters(String name, Integer mountId) {
+        if (mountId != null
+                && mountRepository.existsById(mountId)
+                && name != null
+                && !name.isBlank()) {
+            return cameraRepository.findByNameContainingAndMount(name, mountRepository.findById(mountId).get());
+        } else if (mountId != null && mountRepository.existsById(mountId)) {
+            return cameraRepository.findByMount(mountRepository.findById(mountId).get());
+        } else if (name != null && !name.isBlank()) {
+            return cameraRepository.findByNameContaining(name);
+        } else {
+            return cameraRepository.findAll();
         }
-        return findByNameContaining(name);
     }
 
     public Optional<Camera> findById(Integer id) {

@@ -19,19 +19,19 @@ public class LensService {
         this.mountRepository = mountRepository;
     }
 
-    public List<Lens> findAll() {
-        return lensRepository.findAll();
-    }
-
-    public List<Lens> findByNameContaining(String name) {
-        return lensRepository.findByNameContaining(name);
-    }
-
-    public List<Lens> findAllOrByNameContaining(String name) {
-        if (name == null) {
-            return findAll();
+    public List<Lens> findAllOrWithFilters(String name, Integer mountId) {
+        if (mountId != null
+                && mountRepository.existsById(mountId)
+                && name != null
+                && !name.isBlank()) {
+            return lensRepository.findByNameContainingAndMount(name, mountRepository.findById(mountId).get());
+        } else if (mountId != null && mountRepository.existsById(mountId)) {
+            return lensRepository.findByMount(mountRepository.findById(mountId).get());
+        } else if (name != null && !name.isBlank()) {
+            return lensRepository.findByNameContaining(name);
+        } else {
+            return lensRepository.findAll();
         }
-        return findByNameContaining(name);
     }
 
     public Optional<Lens> findById(Integer id) {

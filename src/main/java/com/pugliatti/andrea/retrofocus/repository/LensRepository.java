@@ -11,4 +11,6 @@ public interface LensRepository extends JpaRepository<Lens, Integer> {
     public List<Lens> findByMount(Mount mount);
 
     public List<Lens> findByNameContaining(String name);
+
+    public List<Lens> findByNameContainingAndMount(String name, Mount mount);
 }
