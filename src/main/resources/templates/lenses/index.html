@@ -14,11 +14,11 @@
                 <form class="column d-flex mb-3" th:action="@{/lenses}">
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
-                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                    <button class="btn btn-warning ms-3" type="submit">Search</button>
                 </form>
 
                 <div class="ms-3">
-                    <a class="btn btn-primary" th:href="@{/lenses/create}">Add lens</a>
+                    <a class="btn btn-warning" th:href="@{/lenses/create}">Add lens</a>
                 </div>
 
             </div>
@@ -45,7 +45,7 @@
                     <td class="hide">[[*{mount.name}]]</td>
                     <td class="hide">[[*{yearReleased.getYear()}]]</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
+                        <a class="btn btn-warning btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show
                         </a>
                         <a class="btn btn-success btn-sm" th:href="@{/lenses/edit/{id}(id = *{id})}">

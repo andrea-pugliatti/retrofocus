@@ -14,11 +14,11 @@
                 <form class="d-flex mb-3" th:action="@{/mounts}">
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
-                    <button class="btn btn-primary ms-3" type="submit">Search</button>
+                    <button class="btn btn-warning ms-3" type="submit">Search</button>
                 </form>
 
                 <div class="ms-3">
-                    <a class="btn btn-primary" th:href="@{/mounts/create}">Add mount</a>
+                    <a class="btn btn-warning" th:href="@{/mounts/create}">Add mount</a>
                 </div>
 
             </div>
@@ -38,7 +38,7 @@
                         <div class="my-2">[[*{description}]]</div>
                         <div class="my-2">
 
-                            <a class="btn btn-primary btn-sm" th:href="@{/mounts/{id}(id = *{id})}">
+                            <a class="btn btn-warning btn-sm" th:href="@{/mounts/{id}(id = *{id})}">
                                 Show
                             </a>
                             <a class="btn btn-success btn-sm" th:href="@{/mounts/edit/{id}(id = *{id})}">
