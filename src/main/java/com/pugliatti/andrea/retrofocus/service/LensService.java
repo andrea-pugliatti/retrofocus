@@ -3,6 +3,9 @@ package com.pugliatti.andrea.retrofocus.service;
 import java.util.List;
 import java.util.Optional;
 import com.pugliatti.andrea.retrofocus.repository.MountRepository;
+import com.pugliatti.andrea.retrofocus.service.specification.LensSpecifications;
+
+import org.springframework.data.jpa.domain.PredicateSpecification;
 import org.springframework.stereotype.Service;
 
 import com.pugliatti.andrea.retrofocus.model.Lens;
@@ -20,18 +23,9 @@ public class LensService {
     }
 
     public List<Lens> findAllOrWithFilters(String name, Integer mountId) {
-        if (mountId != null
-                && mountRepository.existsById(mountId)
-                && name != null
-                && !name.isBlank()) {
-            return lensRepository.findByNameContainingAndMount(name, mountRepository.findById(mountId).get());
-        } else if (mountId != null && mountRepository.existsById(mountId)) {
-            return lensRepository.findByMount(mountRepository.findById(mountId).get());
-        } else if (name != null && !name.isBlank()) {
-            return lensRepository.findByNameContaining(name);
-        } else {
-            return lensRepository.findAll();
-        }
+        return lensRepository.findAll(
+                PredicateSpecification.where(LensSpecifications.hasName(name))
+                        .and(LensSpecifications.hasMount(mountId)));
     }
 
     public Optional<Lens> findById(Integer id) {

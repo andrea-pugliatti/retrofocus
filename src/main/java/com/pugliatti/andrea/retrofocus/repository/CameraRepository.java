@@ -3,11 +3,12 @@ package com.pugliatti.andrea.retrofocus.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 
-public interface CameraRepository extends JpaRepository<Camera, Integer> {
+public interface CameraRepository extends JpaRepository<Camera, Integer>, JpaSpecificationExecutor<Camera> {
     public List<Camera> findByNameContaining(String name);
 
     public List<Camera> findByMount(Mount mount);

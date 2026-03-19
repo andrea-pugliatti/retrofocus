@@ -3,12 +3,14 @@ package com.pugliatti.andrea.retrofocus.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.domain.PredicateSpecification;
 import org.springframework.stereotype.Service;
 
 import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 import com.pugliatti.andrea.retrofocus.repository.MountRepository;
+import com.pugliatti.andrea.retrofocus.service.specification.CameraSpecifications;
 
 @Service
 public class CameraService {
@@ -21,18 +23,9 @@ public class CameraService {
     }
 
     public List<Camera> findAllOrWithFilters(String name, Integer mountId) {
-        if (mountId != null
-                && mountRepository.existsById(mountId)
-                && name != null
-                && !name.isBlank()) {
-            return cameraRepository.findByNameContainingAndMount(name, mountRepository.findById(mountId).get());
-        } else if (mountId != null && mountRepository.existsById(mountId)) {
-            return cameraRepository.findByMount(mountRepository.findById(mountId).get());
-        } else if (name != null && !name.isBlank()) {
-            return cameraRepository.findByNameContaining(name);
-        } else {
-            return cameraRepository.findAll();
-        }
+        return cameraRepository.findAll(
+                PredicateSpecification.where(CameraSpecifications.hasName(name))
+                        .and(CameraSpecifications.hasMount(mountId)));
     }
 
     public Optional<Camera> findById(Integer id) {

@@ -80,7 +80,7 @@ public class Camera {
     @JsonBackReference
     private Mount mount;
 
-    @ManyToMany(mappedBy = "cameras", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "cameras", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Photographer> photographers;
 

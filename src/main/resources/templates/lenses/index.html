@@ -12,7 +12,7 @@
         <div class="my-3">
             <div class="d-flex justify-content-between">
                 <form class="column d-flex mb-3" th:action="@{/lenses}">
-                    <select name="m" class="form-select me-3" style="width: auto;">
+                    <select th:name="m" class="form-select me-3">
                         <option value="">All Mounts</option>
                         <option th:each="mount : ${mounts}" th:value="${mount.id}" th:text="${mount.name}"
                             th:selected="${mount.id == mountId}"></option>
