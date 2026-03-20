@@ -120,56 +120,6 @@
                 </div>
             </div>
 
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" th:value="*{isAnalog}" th:field="*{isAnalog}"
-                    id="check-analog">
-                <label class="form-check-label" for="check-analog">
-                    Is the camera Analog?
-                </label>
-            </div>
-
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" th:value="*{videoCapable}" th:field="*{videoCapable}"
-                    id="check-video">
-                <label class="form-check-label" for="check-video">
-                    Is the camera video capable?
-                </label>
-            </div>
-
-
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label" for="input-min-iso">Minimum ISO: </label>
-                    <input id="input-min-iso" class="form-control" type="number" th:field="*{minIso}">
-                    <div th:if="${#fields.hasErrors('minIso')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('minIso')}" th:text="${err}" />
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <label class="form-label" for="input-max-iso">Maximum ISO: </label>
-                    <input id="input-max-iso" class="form-control" type="number" th:field="*{maxIso}">
-                    <div th:if="${#fields.hasErrors('maxIso')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('maxIso')}" th:text="${err}" />
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="input-resolution">Sensor Resolution: </label>
-                <input id="input-resolution" class="form-control" type="text" th:field="*{sensorResolution}"
-                    th:errorClass="is-invalid">
-                <div th:if="${#fields.hasErrors('sensorResolution')}" class="invalid-feedback">
-                    <ul>
-                        <li th:each="err : ${#fields.errors('sensorResolution')}" th:text="${err}" />
-                    </ul>
-                </div>
-            </div>
-
             <button class="btn btn-warning" type="submit" th:text="${edit ? 'Edit' : 'Create'}"></button>
         </form>
 

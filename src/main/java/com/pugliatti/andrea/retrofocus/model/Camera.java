@@ -18,7 +18,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -59,21 +58,6 @@ public class Camera {
 
     @Size(max = 30, message = "The shutter speed field must be at most 30 characters.")
     private String maxShutterSpeed;
-
-    @Positive(message = "The minimum ISO must be a positive value.")
-    private Integer minIso;
-
-    @Positive(message = "The maximum ISO must be a positive value.")
-    private Integer maxIso;
-
-    @NotNull(message = "The field must not be null.")
-    private Boolean isAnalog;
-
-    @Positive(message = "The resolution must be a positive value.")
-    private Double sensorResolution;
-
-    @NotNull(message = "The field must not be null.")
-    private Boolean videoCapable;
 
     @ManyToOne
     @JoinColumn(name = "mount_id", nullable = false)
@@ -162,46 +146,6 @@ public class Camera {
 
     public void setMaxShutterSpeed(String maxShutterSpeed) {
         this.maxShutterSpeed = maxShutterSpeed;
-    }
-
-    public Integer getMinIso() {
-        return minIso;
-    }
-
-    public void setMinIso(Integer minIso) {
-        this.minIso = minIso;
-    }
-
-    public Integer getMaxIso() {
-        return maxIso;
-    }
-
-    public void setMaxIso(Integer maxIso) {
-        this.maxIso = maxIso;
-    }
-
-    public Boolean getIsAnalog() {
-        return isAnalog;
-    }
-
-    public void setIsAnalog(Boolean isAnalog) {
-        this.isAnalog = isAnalog;
-    }
-
-    public Boolean getVideoCapable() {
-        return videoCapable;
-    }
-
-    public void setVideoCapable(Boolean videoCapable) {
-        this.videoCapable = videoCapable;
-    }
-
-    public Double getSensorResolution() {
-        return sensorResolution;
-    }
-
-    public void setSensorResolution(Double sensorResolution) {
-        this.sensorResolution = sensorResolution;
     }
 
     public Mount getMount() {

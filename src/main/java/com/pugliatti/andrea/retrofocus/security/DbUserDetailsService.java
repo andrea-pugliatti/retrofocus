@@ -24,8 +24,6 @@ public class DbUserDetailsService implements UserDetailsService {
         if (userAttempt.isEmpty()) {
             throw new UsernameNotFoundException("Username " + username + " not found!");
         }
-
         return new DbUserDetails(userAttempt.get());
     }
-
 }

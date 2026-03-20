@@ -29,7 +29,6 @@ public class DbUserDetails implements UserDetails {
         for (Role role : user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-
     }
 
     public Integer getId() {

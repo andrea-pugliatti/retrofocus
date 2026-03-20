@@ -1,4 +1,4 @@
-package com.pugliatti.andrea.retrofocus.service.specification;
+package com.pugliatti.andrea.retrofocus.repository.specification;
 
 import org.springframework.data.jpa.domain.PredicateSpecification;
 

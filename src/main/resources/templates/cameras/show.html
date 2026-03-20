@@ -21,12 +21,6 @@
                         <p class="card-text">
                             [[*{description}]]
                         </p>
-                        <p class="card-text" th:if="${camera.isAnalog}">
-                            Analog Camera
-                        </p>
-                        <p class="card-text" th:unless="${camera.isAnalog}">
-                            Digital Camera
-                        </p>
                         <p class="card-text">
                             <span class="fw-bold">Year </span>
 
@@ -57,21 +51,6 @@
                         <p class="card-text" th:unless="${camera.maxShutterSpeed == null}">
                             <span class="fw-bold">Maximum Shutter Speed </span>
                             [[*{maxShutterSpeed}]]
-                        </p>
-                        <p class="card-text" th:unless="${camera.minIso == null}">
-                            <span class="fw-bold">Minimum ISO </span>
-                            [[*{minIso}]]
-                        </p>
-                        <p class="card-text" th:unless="${camera.maxIso == null}">
-                            <span class="fw-bold">Maximum ISO </span>
-                            [[*{maxIso}]]
-                        </p>
-                        <p class="card-text" th:unless="${camera.sensorResolution == null}">
-                            <span class="fw-bold">Resolution </span>
-                            [[*{sensorResolution}]]
-                        </p>
-                        <p class="card-text" th:if="${camera.videoCapable}">
-                            Video Capable
                         </p>
                         <div class="">
                             <a class="btn btn-success btn-sm" th:href="@{/cameras/edit/{id}(id = *{id})}">

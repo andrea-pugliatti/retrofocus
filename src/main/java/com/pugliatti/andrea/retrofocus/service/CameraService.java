@@ -10,7 +10,7 @@ import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 import com.pugliatti.andrea.retrofocus.repository.MountRepository;
-import com.pugliatti.andrea.retrofocus.service.specification.CameraSpecifications;
+import com.pugliatti.andrea.retrofocus.repository.specification.CameraSpecifications;
 
 @Service
 public class CameraService {

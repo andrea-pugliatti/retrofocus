@@ -10,5 +10,4 @@ import com.pugliatti.andrea.retrofocus.model.Photographer;
 @Repository
 public interface PhotographerRepository extends JpaRepository<Photographer, Integer> {
     public List<Photographer> findByNameContaining(String name);
-
 }

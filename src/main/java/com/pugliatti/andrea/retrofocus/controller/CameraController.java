@@ -42,7 +42,6 @@ public class CameraController {
         if (!service.existsById(cameraId)) {
             return "redirect:/cameras";
         }
-
         model.addAttribute("camera", service.getById(cameraId));
         return "cameras/show";
     }
@@ -78,7 +77,6 @@ public class CameraController {
             model.addAttribute("camera", service.getById(cameraId));
             model.addAttribute("edit", true);
         }
-
         model.addAttribute("mounts", service.findAllMounts());
         return "cameras/edit";
     }

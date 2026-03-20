@@ -3,7 +3,7 @@ package com.pugliatti.andrea.retrofocus.service;
 import java.util.List;
 import java.util.Optional;
 import com.pugliatti.andrea.retrofocus.repository.MountRepository;
-import com.pugliatti.andrea.retrofocus.service.specification.LensSpecifications;
+import com.pugliatti.andrea.retrofocus.repository.specification.LensSpecifications;
 
 import org.springframework.data.jpa.domain.PredicateSpecification;
 import org.springframework.stereotype.Service;
