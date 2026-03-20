@@ -10,20 +10,22 @@
         <h2 class="my-3 playfair-font">Cameras</h2>
 
         <div class="my-3">
-            <div class="column d-flex justify-content-between">
-                <form class="d-flex mb-3" th:action="@{/cameras}">
-                    <select name="m" class="form-select me-3" style="width: auto;">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-sm-start">
+                <form class="d-flex mb-3 full-width-sm" th:action="@{/cameras}">
+                    <select name="m" class="form-select me-2 me-md-3" style="width: auto;">
                         <option value="">All Mounts</option>
                         <option th:each="mount : ${mounts}" th:value="${mount.id}" th:text="${mount.name}"
                             th:selected="${mount.id == mountId}"></option>
                     </select>
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
-                    <button class="btn btn-warning ms-3" type="submit">Search</button>
+                    <button class="btn btn-warning ms-2 ms-md-3" type="submit">Search</button>
                 </form>
 
-                <div class="ms-3">
-                    <a class="btn btn-warning" th:href="@{/cameras/create}">Add camera</a>
+                <div class="ms-sm-0 ms-md-3 mb-3">
+                    <a class="btn btn-warning full-width-sm" th:href="@{/cameras/create}">
+                        Add camera
+                    </a>
                 </div>
             </div>
         </div>
@@ -37,9 +39,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th class="hide" scope="col">Type</th>
-                    <th class="hide" scope="col">Format</th>
-                    <th class="hide" scope="col">Release Year</th>
+                    <th class="hide-sm" scope="col">Type</th>
+                    <th class="hide-sm" scope="col">Format</th>
+                    <th class="hide-sm" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -47,9 +49,9 @@
                 <tr th:each="camera: ${cameras}" th:object="${camera}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td class="hide">[[*{type}]]</td>
-                    <td class="hide">[[*{format}]]</td>
-                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm">[[*{type}]]</td>
+                    <td class="hide-sm">[[*{format}]]</td>
+                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/cameras/{id}(id = *{id})}">
                             Show

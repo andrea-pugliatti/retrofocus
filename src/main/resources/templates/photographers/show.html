@@ -6,15 +6,15 @@
 <body>
     <div th:replace="~{fragments/header :: header('photographers')}" />
 
-    <main class="container d-flex flex-column align-items-center">
+    <main class="container">
 
-        <div class="card my-5" th:object="${photographer}">
+        <div class="card my-5 mx-auto" th:object="${photographer}">
             <div class="row g-0">
-                <div class="col-md-8">
-                    <img th:src="|/images/*{image}|" class="img-fluid rounded-start" alt="">
+                <div class="col-md-7 col-lg-8">
+                    <img th:src="|/images/*{image}|" class="img-fluid rounded-start w-100" alt="">
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5 col-lg-4">
                     <div class="card-body">
                         <h3 class="card-title playfair-font">
                             [[*{name}]]

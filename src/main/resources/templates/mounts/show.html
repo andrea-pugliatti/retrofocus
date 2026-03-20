@@ -6,24 +6,26 @@
 <body>
     <div th:replace="~{fragments/header :: header('mounts')}" />
 
-    <main class="container d-flex flex-column align-items-center">
-        <h1 class="playfair-font fs-1 my-3">
-            [[${mount.name}]]
-        </h1>
+    <main class="container">
+        <div class="text-center">
+            <h1 class="playfair-font fs-1 my-3">
+                [[${mount.name}]]
+            </h1>
 
-        <p class="mb-3">
-            [[${mount.description}]]
-        </p>
+            <p class="mb-3">
+                [[${mount.description}]]
+            </p>
 
-        <div class="d-flex justify-content-around mb-3">
-            <a class="btn btn-success btn-sm mx-3" th:href="@{/mounts/edit/{id}(id = ${mount.id})}">
-                Update
-            </a>
-            <div th:replace="~{fragments/modal :: trigger(${mount.id})}" />
-            <div th:replace="~{fragments/modal :: modal(${mount.name}, 'mounts', ${mount.id})}" />
+            <div class="d-flex justify-content-center mb-5">
+                <a class="btn btn-success btn-sm mx-2" th:href="@{/mounts/edit/{id}(id = ${mount.id})}">
+                    Update
+                </a>
+                <div th:replace="~{fragments/modal :: trigger(${mount.id})}" />
+                <div th:replace="~{fragments/modal :: modal(${mount.name}, 'mounts', ${mount.id})}" />
+            </div>
         </div>
 
-        <h2 class="my-3 align-self-start playfair-font">
+        <h2 class="my-3 playfair-font">
             Cameras with this mount
         </h2>
 
@@ -36,9 +38,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th class="hide" scope="col">Type</th>
-                    <th class="hide" scope="col">Format</th>
-                    <th class="hide" scope="col">Release Year</th>
+                    <th class="hide-sm" scope="col">Type</th>
+                    <th class="hide-sm" scope="col">Format</th>
+                    <th class="hide-sm" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,9 +48,9 @@
                 <tr th:each="camera: ${cameras}" th:object="${camera}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td class="hide">[[*{type}]]</td>
-                    <td class="hide">[[*{format}]]</td>
-                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm">[[*{type}]]</td>
+                    <td class="hide-sm">[[*{format}]]</td>
+                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/cameras/{id}(id = *{id})}">
                             Show
@@ -63,7 +65,7 @@
             </tbody>
         </table>
 
-        <h2 class="my-3 align-self-start playfair-font">
+        <h2 class="my-3 playfair-font">
             Lenses with this mount
         </h2>
 
@@ -76,7 +78,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th class="hide" scope="col">Release Year</th>
+                    <th class="hide-sm" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -84,7 +86,7 @@
                 <tr th:each="lens: ${lenses}" th:object="${lens}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show

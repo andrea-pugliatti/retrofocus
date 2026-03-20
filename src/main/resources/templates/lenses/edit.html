@@ -7,10 +7,10 @@
     <div th:replace="~{fragments/header :: header('lenses')}" />
 
     <main class="container">
-        <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + lens.name : 'Add new Lens'}"></h2>
+        <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + lens.name : 'Add new lens'}"></h2>
 
-        <form class="mb-5 px-5" th:object="${lens}" th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}"
-            method="post">
+        <form class="mb-5 px-2 px-md-5" th:object="${lens}"
+            th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}" method="post">
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>
                 <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">

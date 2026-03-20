@@ -7,10 +7,10 @@
     <div th:replace="~{fragments/header :: header('mounts')}" />
 
     <main class="container">
-        <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + mount.name : 'Add new Mount'}"></h2>
+        <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + mount.name : 'Add new mount'}"></h2>
 
-        <form class="mb-5 px-5" th:object="${mount}" th:action="${edit ? '/mounts/edit/' + id : '/mounts/create'}"
-            method="post">
+        <form class="mb-5 px-2 px-md-5" th:object="${mount}"
+            th:action="${edit ? '/mounts/edit/' + id : '/mounts/create'}" method="post">
 
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>

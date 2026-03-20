@@ -9,8 +9,8 @@
     <main class="container">
         <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + camera.name : 'Add new camera'}"></h2>
 
-        <form class="mb-5 px-5" th:object="${camera}" th:action="${edit ? '/cameras/edit/' + id : '/cameras/create'}"
-            method="post">
+        <form class="mb-5 px-2 px-md-5" th:object="${camera}"
+            th:action="${edit ? '/cameras/edit/' + id : '/cameras/create'}" method="post">
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>
                 <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">

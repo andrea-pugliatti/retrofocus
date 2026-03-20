@@ -10,15 +10,15 @@
         <h2 class="my-3 playfair-font">Photographers</h2>
 
         <div class="my-3">
-            <div class="column d-flex justify-content-between">
-                <form class="d-flex mb-3" th:action="@{/photographers}">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-start">
+                <form class="d-flex mb-3 full-width-sm" th:action="@{/photographers}">
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
-                    <button class="btn btn-warning ms-3" type="submit">Search</button>
+                    <button class="btn btn-warning ms-2 ms-md-3" type="submit">Search</button>
                 </form>
 
-                <div class="ms-3">
-                    <a class="btn btn-warning" th:href="@{/photographers/create}">
+                <div class="ms-sm-0 ms-md-3 mb-3">
+                    <a class="btn btn-warning full-width-sm" th:href="@{/photographers/create}">
                         Add photographer
                     </a>
                 </div>

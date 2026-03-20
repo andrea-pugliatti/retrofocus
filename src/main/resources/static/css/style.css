@@ -26,6 +26,7 @@ body {
   display: grid; 
   grid-template-columns: repeat(4, minmax(120px, 1fr));
   gap: 0.5rem;
+
   & > * {
     padding-block: 0.5rem;
     border: 1px solid rgba(112, 99, 92, 0.3);
@@ -36,13 +37,21 @@ body {
 .card-list {
   list-style: none;
   padding-inline: 0;
+
   & > * + * {
     margin-block: 0.2rem;
   }
 }
 
+.card img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .logo {
-  height: 300px;
+  height: clamp(150px, 40vw, 300px);
+  width: auto;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 770px) {
@@ -50,19 +59,17 @@ body {
     grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 
-  .hide {
+  .hide-sm {
     display: none;
   }
 
-  .column {
-    flex-direction: column;
-    & > * {
-      margin-bottom: 0.2rem;
-      margin-inline-end: 0.2rem;
-    }
+  .full-width-sm {
+    width: 100%;
   }
+}
 
-  .logo {
-    height: 200px;
+@media screen and (max-width: 580px) {
+  .checkbox-grid {
+    grid-template-columns: 1fr;
   }
 }

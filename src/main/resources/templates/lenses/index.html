@@ -10,9 +10,9 @@
         <h2 class="my-3 playfair-font">Lenses</h2>
 
         <div class="my-3">
-            <div class="d-flex justify-content-between">
-                <form class="column d-flex mb-3" th:action="@{/lenses}">
-                    <select th:name="m" class="form-select me-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-start">
+                <form class="d-flex mb-3 full-width-sm" th:action="@{/lenses}">
+                    <select th:name="m" class="form-select me-2 me-md-3" style="width: auto;">
                         <option value="">All Mounts</option>
                         <option th:each="mount : ${mounts}" th:value="${mount.id}" th:text="${mount.name}"
                             th:selected="${mount.id == mountId}"></option>
@@ -20,11 +20,13 @@
 
                     <input id="search-bar" class="form-control" type="text" th:name="q" th:value="${query}"
                         placeholder="Search...">
-                    <button class="btn btn-warning ms-3" type="submit">Search</button>
+                    <button class="btn btn-warning ms-2 ms-md-3" type="submit">Search</button>
                 </form>
 
-                <div class="ms-3">
-                    <a class="btn btn-warning" th:href="@{/lenses/create}">Add lens</a>
+                <div class="ms-sm-0 ms-md-3 mb-3">
+                    <a class="btn btn-warning full-width-sm" th:href="@{/lenses/create}">
+                        Add lens
+                    </a>
                 </div>
 
             </div>
@@ -39,8 +41,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th class="hide" scope="col">Mount</th>
-                    <th class="hide" scope="col">Release Year</th>
+                    <th class="hide-sm" scope="col">Mount</th>
+                    <th class="hide-sm" scope="col">Release Year</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -48,8 +50,8 @@
                 <tr th:each="lens: ${lenses}" th:object="${lens}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td class="hide">[[*{mount.name}]]</td>
-                    <td class="hide">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm">[[*{mount.name}]]</td>
+                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show
