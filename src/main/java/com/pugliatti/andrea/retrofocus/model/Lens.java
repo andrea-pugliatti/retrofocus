@@ -3,6 +3,8 @@ package com.pugliatti.andrea.retrofocus.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -38,6 +40,7 @@ public class Lens {
     @Size(max = 70, message = "The image url must be at most 50 characters.")
     private String image;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent(message = "The year of release must be in the past.")
     private LocalDate yearReleased;
 
