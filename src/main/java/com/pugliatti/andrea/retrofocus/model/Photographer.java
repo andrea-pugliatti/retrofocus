@@ -3,8 +3,6 @@ package com.pugliatti.andrea.retrofocus.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +32,6 @@ public class Photographer {
     @Size(max = 70, message = "The image url must be at most 50 characters.")
     private String image;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "The birthday must be in the past.")
     @NotNull(message = "The birthday must be inserted.")
     private LocalDate birthday;
