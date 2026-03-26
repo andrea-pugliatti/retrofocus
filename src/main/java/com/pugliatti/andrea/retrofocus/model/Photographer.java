@@ -29,7 +29,7 @@ public class Photographer {
     @Size(min = 2, max = 50, message = "The name must be between 2 and 50 characters.")
     private String name;
 
-    @Size(max = 70, message = "The image url must be at most 50 characters.")
+    @Size(max = 70, message = "The image url must be at most 70 characters.")
     private String image;
 
     @Past(message = "The birthday must be in the past.")

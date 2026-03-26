@@ -35,7 +35,7 @@ public class Lens {
     @Lob
     private String description;
 
-    @Size(max = 70, message = "The image url must be at most 50 characters.")
+    @Size(max = 70, message = "The image url must be at most 70 characters.")
     private String image;
 
     @PastOrPresent(message = "The year of release must be in the past.")
