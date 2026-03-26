@@ -25,6 +25,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <form style="display: inline;" th:action="@{/{type}/delete/{id}(type = ${type}, id = ${id})}"
                             method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>

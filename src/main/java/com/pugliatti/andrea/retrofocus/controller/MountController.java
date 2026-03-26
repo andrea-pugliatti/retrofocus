@@ -81,11 +81,13 @@ public class MountController {
     public String update(
             @Valid @ModelAttribute(name = "mount") Mount formMount,
             BindingResult bindingResult,
+            @PathVariable Integer id,
             Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
             return "mounts/edit";
         }
+        formMount.setId(id);
         Mount mount = service.edit(formMount);
         return "redirect:/mounts/" + mount.getId();
     }

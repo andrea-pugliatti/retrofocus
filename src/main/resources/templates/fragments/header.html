@@ -50,7 +50,10 @@
                 </ul>
 
                 <div class="ms-lg-auto mt-3 mt-lg-0">
-                    <a href="/logout" class="btn btn-sm btn-warning">Logout</a>
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                        <button type="submit" class="btn btn-sm btn-warning">Logout</button>
+                    </form>
                 </div>
             </div>
 

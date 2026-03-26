@@ -85,12 +85,14 @@ public class LensController {
     public String update(
             @Valid @ModelAttribute(name = "lens") Lens formLens,
             BindingResult bindingResult,
+            @PathVariable Integer id,
             Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("mounts", service.findAllMounts());
             model.addAttribute("edit", true);
             return "lenses/edit";
         }
+        formLens.setId(id);
         Lens lens = service.edit(formLens);
         return "redirect:/lenses/" + lens.getId();
     }

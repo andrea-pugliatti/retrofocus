@@ -85,6 +85,7 @@ public class PhotographerController {
     public String update(
             @Valid @ModelAttribute Photographer formPhotographer,
             BindingResult bindingResult,
+            @PathVariable Integer id,
             Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
@@ -92,7 +93,7 @@ public class PhotographerController {
             model.addAttribute("lenses", service.findAllLenses());
             return "photographers/edit";
         }
-
+        formPhotographer.setId(id);
         Photographer editedPhotographer = service.edit(formPhotographer);
         return "redirect:/photographers/" + editedPhotographer.getId();
     }

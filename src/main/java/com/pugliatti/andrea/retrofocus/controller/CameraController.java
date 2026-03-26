@@ -84,6 +84,7 @@ public class CameraController {
     @PostMapping("/edit/{id}")
     public String update(
             Model model,
+            @PathVariable(name = "id") Integer cameraId,
             @Valid @ModelAttribute(name = "camera") Camera formCamera,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -91,6 +92,7 @@ public class CameraController {
             model.addAttribute("mounts", service.findAllMounts());
             return "cameras/edit";
         }
+        formCamera.setId(cameraId);
         Camera camera = service.edit(formCamera);
         return "redirect:/cameras/" + camera.getId();
     }

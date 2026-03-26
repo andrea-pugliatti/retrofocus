@@ -11,6 +11,7 @@
 
         <form class="mb-5 px-2 px-md-5" th:object="${lens}"
             th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>
                 <input id="input-name" class="form-control" type="text" th:field="*{name}" th:errorClass="is-invalid">

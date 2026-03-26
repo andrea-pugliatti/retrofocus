@@ -12,6 +12,7 @@
 
         <form class="mb-5 px-2 px-md-5" th:object="${photographer}"
             th:action="${edit ? '/photographers/edit/' + photographer.id : '/photographers/create'}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>
