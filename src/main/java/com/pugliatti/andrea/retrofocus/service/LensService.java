@@ -53,6 +53,8 @@ public class LensService {
     }
 
     public void deleteById(Integer id) {
-        lensRepository.deleteById(id);
+        if (lensRepository.existsById(id)) {
+            lensRepository.deleteById(id);
+        }
     }
 }

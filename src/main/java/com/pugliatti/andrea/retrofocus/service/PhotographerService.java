@@ -71,6 +71,8 @@ public class PhotographerService {
     }
 
     public void deleteById(Integer id) {
-        photographerRepository.deleteById(id);
+        if (photographerRepository.existsById(id)) {
+            photographerRepository.deleteById(id);
+        }
     }
 }

@@ -50,7 +50,7 @@
                     <td>[[*{name}]]</td>
                     <td class="hide-sm">[[*{type}]]</td>
                     <td class="hide-sm">[[*{format}]]</td>
-                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm" th:text="*{yearReleased != null ? yearReleased.getYear() : ''}"></td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/cameras/{id}(id = *{id})}">
                             Show
@@ -86,7 +86,7 @@
                 <tr th:each="lens: ${lenses}" th:object="${lens}">
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
-                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm" th:text="*{yearReleased != null ? yearReleased.getYear() : ''}"></td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show

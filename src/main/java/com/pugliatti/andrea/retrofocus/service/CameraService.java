@@ -53,6 +53,8 @@ public class CameraService {
     }
 
     public void deleteById(Integer id) {
-        cameraRepository.deleteById(id);
+        if (cameraRepository.existsById(id)) {
+            cameraRepository.deleteById(id);
+        }
     }
 }

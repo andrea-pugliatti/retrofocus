@@ -69,6 +69,8 @@ public class MountService {
     }
 
     public void deleteById(Integer id) {
-        mountRepository.deleteById(id);
+        if (mountRepository.existsById(id)) {
+            mountRepository.deleteById(id);
+        }
     }
 }

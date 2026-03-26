@@ -51,7 +51,7 @@
                     <th scope="row">[[*{id}]]</th>
                     <td>[[*{name}]]</td>
                     <td class="hide-sm">[[*{mount.name}]]</td>
-                    <td class="hide-sm">[[*{yearReleased.getYear()}]]</td>
+                    <td class="hide-sm" th:text="*{yearReleased != null ? yearReleased.getYear() : ''}"></td>
                     <td>
                         <a class="btn btn-warning btn-sm" th:href="@{/lenses/{id}(id = *{id})}">
                             Show

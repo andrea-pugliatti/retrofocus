@@ -40,7 +40,7 @@ public class LensController {
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
         if (!service.existsById(id)) {
-            return "redirect:/lenses/index";
+            return "redirect:/lenses";
         }
         model.addAttribute("lens", service.getById(id));
         return "lenses/show";

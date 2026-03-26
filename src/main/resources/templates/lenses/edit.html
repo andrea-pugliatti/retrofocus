@@ -10,7 +10,7 @@
         <h2 class="text-center my-3 playfair-font" th:text="${edit ? 'Edit ' + lens.name : 'Add new lens'}"></h2>
 
         <form class="mb-5 px-2 px-md-5" th:object="${lens}"
-            th:action="${edit ? '/lenses/edit/' + id : '/lenses/create'}" method="post">
+            th:action="${edit ? '/lenses/edit/' + lens.id : '/lenses/create'}" method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="mb-3">
                 <label class="form-label" for="input-name">Name: </label>
