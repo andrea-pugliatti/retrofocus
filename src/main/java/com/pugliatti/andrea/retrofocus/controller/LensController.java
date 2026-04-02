@@ -78,7 +78,7 @@ public class LensController {
             model.addAttribute("edit", true);
         }
         model.addAttribute("mounts", service.findAllMounts());
-        return "/lenses/edit";
+        return "lenses/edit";
     }
 
     @PostMapping("/edit/{id}")

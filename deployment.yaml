@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: retrofocus-pod
+spec:
+  containers:
+    - name: mysqldb
+      image: mysql:latest
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+        - name: MYSQL_DATABASE
+          value: "retrofocus"
+      ports:
+        - containerPort: 3306
+
+    - name: app
+      image: retrofocus:latest
+      ports:
+        - containerPort: 8080
+          hostPort: 8080
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://mysqldb:3306/retrofocus?useSSL=false&allowPublicKeyRetrieval=true"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "password"
