@@ -5,14 +5,14 @@ metadata:
 spec:
   containers:
     - name: mysqldb
-      image: mysql:latest
+      image: mysql:lts
+      ports:
+        - containerPort: 3306
       env:
         - name: MYSQL_ROOT_PASSWORD
           value: "password"
         - name: MYSQL_DATABASE
           value: "retrofocus"
-      ports:
-        - containerPort: 3306
 
     - name: app
       image: retrofocus:latest
@@ -20,9 +20,13 @@ spec:
         - containerPort: 8080
           hostPort: 8080
       env:
-        - name: SPRING_DATASOURCE_URL
-          value: "jdbc:mysql://mysqldb:3306/retrofocus?useSSL=false&allowPublicKeyRetrieval=true"
-        - name: SPRING_DATASOURCE_USERNAME
+        - name: MYSQL_NAME
+          value: "localhost"
+        - name: MYSQL_DOCKER_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE
+          value: "retrofocus"
+        - name: MYSQL_USER
           value: "root"
-        - name: SPRING_DATASOURCE_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
           value: "password"
