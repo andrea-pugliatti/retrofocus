@@ -2,7 +2,7 @@
 FROM eclipse-temurin:25-jdk as builder
 WORKDIR /usr/app
 COPY . .
-RUN --mount=type=cache,id=m2-cache,target=/root/.m2 ./mvnw clean package -DskipTests
+RUN --mount=type=cache,id=cache-m2,target=/root/.m2 ./mvnw clean package -DskipTests
 
 # Second stage: Create the runtime image
 FROM eclipse-temurin:25-jre
