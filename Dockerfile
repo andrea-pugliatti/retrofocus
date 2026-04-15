@@ -2,7 +2,7 @@
 FROM eclipse-temurin:25-jdk as builder
 WORKDIR /usr/app
 COPY . .
-RUN --mount=type=cache,id=retrofocus-/root/m2,target=/root/.m2 ./mvnw clean package -DskipTests
+RUN --mount=type=cache,id=s/retrofocus-/root/m2,target=/root/.m2 ./mvnw clean package -DskipTests
 
 # Second stage: Create the runtime image
 FROM eclipse-temurin:25-jre
