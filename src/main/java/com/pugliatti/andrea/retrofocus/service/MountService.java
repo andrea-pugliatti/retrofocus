@@ -1,25 +1,28 @@
 package com.pugliatti.andrea.retrofocus.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
+import com.pugliatti.andrea.retrofocus.exception.ResourceNotFoundException;
 import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Lens;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 import com.pugliatti.andrea.retrofocus.repository.LensRepository;
 import com.pugliatti.andrea.retrofocus.repository.MountRepository;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MountService {
+
     private final LensRepository lensRepository;
     private final CameraRepository cameraRepository;
     private final MountRepository mountRepository;
 
-    public MountService(MountRepository mountRepository, CameraRepository cameraRepository,
-            LensRepository lensRepository) {
+    public MountService(
+        MountRepository mountRepository,
+        CameraRepository cameraRepository,
+        LensRepository lensRepository
+    ) {
         this.mountRepository = mountRepository;
         this.cameraRepository = cameraRepository;
         this.lensRepository = lensRepository;
@@ -49,7 +52,9 @@ public class MountService {
     }
 
     public Mount getById(Integer id) {
-        return findById(id).get();
+        return findById(id).orElseThrow(() ->
+            new ResourceNotFoundException("Mount not found with id: " + id)
+        );
     }
 
     public List<Camera> findAllCameras(Mount mount) {

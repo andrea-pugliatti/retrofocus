@@ -1,31 +1,36 @@
 package com.pugliatti.andrea.retrofocus.service;
 
-import java.util.List;
-import java.util.Optional;
-import com.pugliatti.andrea.retrofocus.repository.MountRepository;
-import com.pugliatti.andrea.retrofocus.repository.specification.LensSpecifications;
-
-import org.springframework.data.jpa.domain.PredicateSpecification;
-import org.springframework.stereotype.Service;
-
+import com.pugliatti.andrea.retrofocus.exception.ResourceNotFoundException;
 import com.pugliatti.andrea.retrofocus.model.Lens;
 import com.pugliatti.andrea.retrofocus.model.Mount;
 import com.pugliatti.andrea.retrofocus.repository.LensRepository;
+import com.pugliatti.andrea.retrofocus.repository.MountRepository;
+import com.pugliatti.andrea.retrofocus.repository.specification.LensSpecifications;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.jpa.domain.PredicateSpecification;
+import org.springframework.stereotype.Service;
 
 @Service
 public class LensService {
+
     private final MountRepository mountRepository;
     private final LensRepository lensRepository;
 
-    public LensService(LensRepository lensRepository, MountRepository mountRepository) {
+    public LensService(
+        LensRepository lensRepository,
+        MountRepository mountRepository
+    ) {
         this.lensRepository = lensRepository;
         this.mountRepository = mountRepository;
     }
 
     public List<Lens> findAllOrWithFilters(String name, Integer mountId) {
         return lensRepository.findAll(
-                PredicateSpecification.where(LensSpecifications.hasName(name))
-                        .and(LensSpecifications.hasMount(mountId)));
+            PredicateSpecification.where(LensSpecifications.hasName(name)).and(
+                LensSpecifications.hasMount(mountId)
+            )
+        );
     }
 
     public Optional<Lens> findById(Integer id) {
@@ -33,7 +38,9 @@ public class LensService {
     }
 
     public Lens getById(Integer id) {
-        return findById(id).get();
+        return findById(id).orElseThrow(() ->
+            new ResourceNotFoundException("Lens not found with id: " + id)
+        );
     }
 
     public Boolean existsById(Integer id) {

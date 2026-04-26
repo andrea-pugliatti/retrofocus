@@ -1,27 +1,28 @@
 package com.pugliatti.andrea.retrofocus.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
+import com.pugliatti.andrea.retrofocus.exception.ResourceNotFoundException;
 import com.pugliatti.andrea.retrofocus.model.Camera;
 import com.pugliatti.andrea.retrofocus.model.Lens;
 import com.pugliatti.andrea.retrofocus.model.Photographer;
 import com.pugliatti.andrea.retrofocus.repository.CameraRepository;
 import com.pugliatti.andrea.retrofocus.repository.LensRepository;
 import com.pugliatti.andrea.retrofocus.repository.PhotographerRepository;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PhotographerService {
+
     private final PhotographerRepository photographerRepository;
     private final CameraRepository cameraRepository;
     private final LensRepository lensRepository;
 
     public PhotographerService(
-            PhotographerRepository photographerRepository,
-            CameraRepository cameraRepository,
-            LensRepository lensRepository) {
+        PhotographerRepository photographerRepository,
+        CameraRepository cameraRepository,
+        LensRepository lensRepository
+    ) {
         this.photographerRepository = photographerRepository;
         this.cameraRepository = cameraRepository;
         this.lensRepository = lensRepository;
@@ -51,7 +52,11 @@ public class PhotographerService {
     }
 
     public Photographer getById(Integer id) {
-        return findById(id).get();
+        return findById(id).orElseThrow(() ->
+            new ResourceNotFoundException(
+                "Photographer not found with id: " + id
+            )
+        );
     }
 
     public List<Camera> findAllCameras() {
