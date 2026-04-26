@@ -1,24 +1,22 @@
 package com.pugliatti.andrea.retrofocus.controller;
 
+import com.pugliatti.andrea.retrofocus.model.Camera;
+import com.pugliatti.andrea.retrofocus.service.CameraService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.pugliatti.andrea.retrofocus.model.Camera;
-import com.pugliatti.andrea.retrofocus.service.CameraService;
-
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/cameras")
 public class CameraController {
+
     private final CameraService service;
 
     public CameraController(CameraService cameraService) {
@@ -27,10 +25,14 @@ public class CameraController {
 
     @GetMapping
     public String index(
-            Model model,
-            @RequestParam(value = "q", required = false) String name,
-            @RequestParam(value = "m", required = false) Integer mountId) {
-        model.addAttribute("cameras", service.findAllOrWithFilters(name, mountId));
+        Model model,
+        @RequestParam(value = "q", required = false) String name,
+        @RequestParam(value = "m", required = false) Integer mountId
+    ) {
+        model.addAttribute(
+            "cameras",
+            service.findAllOrWithFilters(name, mountId)
+        );
         model.addAttribute("mounts", service.findAllMounts());
         model.addAttribute("query", name);
         model.addAttribute("mountId", mountId);
@@ -38,7 +40,10 @@ public class CameraController {
     }
 
     @GetMapping("/{id}")
-    public String show(Model model, @PathVariable(name = "id") Integer cameraId) {
+    public String show(
+        Model model,
+        @PathVariable(name = "id") Integer cameraId
+    ) {
         if (!service.existsById(cameraId)) {
             return "redirect:/cameras";
         }
@@ -56,20 +61,24 @@ public class CameraController {
 
     @PostMapping("/create")
     public String store(
-            @Valid @ModelAttribute("camera") Camera formCamera,
-            BindingResult bindingResult,
-            Model model) {
+        @Valid @ModelAttribute("camera") Camera formCamera,
+        BindingResult bindingResult,
+        Model model
+    ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", false);
             model.addAttribute("mounts", service.findAllMounts());
-            return "/cameras/edit";
+            return "cameras/edit";
         }
         Camera camera = service.save(formCamera);
         return "redirect:/cameras/" + camera.getId();
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable(name = "id") Integer cameraId) {
+    public String edit(
+        Model model,
+        @PathVariable(name = "id") Integer cameraId
+    ) {
         if (!service.existsById(cameraId)) {
             model.addAttribute("camera", new Camera());
             model.addAttribute("edit", false);
@@ -83,10 +92,11 @@ public class CameraController {
 
     @PostMapping("/edit/{id}")
     public String update(
-            Model model,
-            @PathVariable(name = "id") Integer cameraId,
-            @Valid @ModelAttribute(name = "camera") Camera formCamera,
-            BindingResult bindingResult) {
+        Model model,
+        @PathVariable(name = "id") Integer cameraId,
+        @Valid @ModelAttribute(name = "camera") Camera formCamera,
+        BindingResult bindingResult
+    ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
             model.addAttribute("mounts", service.findAllMounts());
@@ -102,5 +112,4 @@ public class CameraController {
         service.deleteById(cameraId);
         return "redirect:/cameras";
     }
-
 }
