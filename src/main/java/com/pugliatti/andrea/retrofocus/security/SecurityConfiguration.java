@@ -21,21 +21,19 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http)
-        throws Exception {
+            throws Exception {
         http
-            .authorizeHttpRequests(request ->
-                request
-                    .requestMatchers("/")
-                    .hasAnyAuthority("ADMIN", "USER")
-                    .requestMatchers("/api/**")
-                    .permitAll()
-                    .requestMatchers("/images/**")
-                    .permitAll()
-                    .requestMatchers("/**")
-                    .hasAnyAuthority("ADMIN", "USER")
-            )
-            .formLogin(Customizer.withDefaults())
-            .cors(Customizer.withDefaults());
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/")
+                        .hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers("/api/**")
+                        .permitAll()
+                        .requestMatchers("/images/**")
+                        .permitAll()
+                        .requestMatchers("/**")
+                        .hasAnyAuthority("ADMIN", "USER"))
+                .formLogin(Customizer.withDefaults())
+                .cors(Customizer.withDefaults());
 
         return http.build();
     }
@@ -44,24 +42,19 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-            List.of("http://localhost:3000", "http://localhost:5173")
-        );
+                List.of("http://localhost:3000", "http://localhost:5173"));
         configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setMaxAge(Duration.ofHours(1));
-        UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", configuration);
         return source;
     }
 
-    @Bean
     DaoAuthenticationProvider authenticationProvider(
-        DbUserDetailsService dbUserDetailsService
-    ) {
+            DbUserDetailsService dbUserDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(
-            dbUserDetailsService
-        );
+                dbUserDetailsService);
 
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;

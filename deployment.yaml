@@ -13,6 +13,13 @@ spec:
           value: "password"
         - name: MYSQL_DATABASE
           value: "retrofocus"
+        - name: MYSQL_ROOT_HOST
+          value: "%"
+      readinessProbe:
+        exec:
+          command: [ "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword" ]
+        initialDelaySeconds: 10
+        periodSeconds: 10
 
     - name: app
       image: retrofocus:latest
